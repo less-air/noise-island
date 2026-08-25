@@ -1,0 +1,606 @@
+{
+  "cities": [
+    {
+      "name": "Limerick",
+      "lat": 52.6638,
+      "lng": -8.6267
+    },
+    {
+      "name": "Cork",
+      "lat": 51.8985,
+      "lng": -8.4756
+    },
+    {
+      "name": "Leitrim",
+      "lat": 54.125,
+      "lng": -8.0
+    },
+    {
+      "name": "Dublin",
+      "lat": 53.3498,
+      "lng": -6.2603
+    },
+    {
+      "name": "Sligo",
+      "lat": 54.2766,
+      "lng": -8.4761
+    },
+    {
+      "name": "Kilkenny",
+      "lat": 52.6541,
+      "lng": -7.2448
+    },
+    {
+      "name": "Belfast",
+      "lat": 54.5973,
+      "lng": -5.9301
+    },
+    {
+      "name": "Galway",
+      "lat": 53.2707,
+      "lng": -9.0568
+    },
+    {
+      "name": "Dundalk",
+      "lat": 54.0027,
+      "lng": -6.4059
+    }
+  ],
+  "artists": [
+    {
+      "artist": "The Animal",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Paddy Mulcahy",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Melancholy Hill",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick/Hungary",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Robin Parmar",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Less Air",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "These Quiet Hours",
+      "locations": [
+        "Cork"
+      ],
+      "locationRaw": "Cork",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Kateryna Horbenkova",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "oootini",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Natalia Beylis",
+      "locations": [
+        "Leitrim"
+      ],
+      "locationRaw": "Leitrim",
+      "genre": null,
+      "website": null,
+      "notes": "Runs the Drumnadubber Artist Studios"
+    },
+    {
+      "artist": "Last Eden",
+      "locations": [
+        "Limerick",
+        "Dublin"
+      ],
+      "locationRaw": "Limerick/Dublin",
+      "genre": "Industrial",
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Daire Lennon",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Roslyn Steer",
+      "locations": [
+        "Cork"
+      ],
+      "locationRaw": "Cork",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "It Blooms at Night",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Péist",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick",
+      "genre": null,
+      "website": null,
+      "notes": "Collective/Band"
+    },
+    {
+      "artist": "Declan Synnott",
+      "locations": [
+        "Dublin"
+      ],
+      "locationRaw": "Dublin",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Aidan Reilly",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Tony Higgins",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Agu",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "FurAngKa",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Phil Maguire",
+      "locations": [
+        "Cork"
+      ],
+      "locationRaw": "Scotland/Cork",
+      "genre": null,
+      "website": null,
+      "notes": "Solo"
+    },
+    {
+      "artist": "Jason Kahn",
+      "locations": [],
+      "locationRaw": "Zurich",
+      "genre": null,
+      "website": null,
+      "notes": "Solo"
+    },
+    {
+      "artist": "Patrick Corcoran",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Tony Monahan",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "BB84",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": "Collective/Band"
+    },
+    {
+      "artist": "Nílim",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick",
+      "genre": "Noise Metal",
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Black Coral",
+      "locations": [
+        "Dublin"
+      ],
+      "locationRaw": "Dublin",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Miss Foreign Affairs",
+      "locations": [
+        "Sligo"
+      ],
+      "locationRaw": "Sligo",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Therapy Horse",
+      "locations": [
+        "Cork"
+      ],
+      "locationRaw": "Cork",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "WOLFBAIT",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Kieran Kahoe",
+      "locations": [
+        "Kilkenny"
+      ],
+      "locationRaw": "Kilkenny",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "arvq",
+      "locations": [
+        "Sligo"
+      ],
+      "locationRaw": "Sligo",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Sine Tiler",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Chris Ledwidge",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Lou McMahon",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Mat Warren",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Jonathan Crean",
+      "locations": [
+        "Sligo"
+      ],
+      "locationRaw": "Sligo",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "White Sage",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Marc Aubele",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "barrelling+",
+      "locations": [
+        "Cork"
+      ],
+      "locationRaw": "Cork",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Aidan Thomas Tobin",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "French Radio Constellation",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Russell's Bogle",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "SexyTadhg",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "tec",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "K.C.N.",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Katie Gerardine O'Neill",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "alfa00",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Cáitín",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "KNRG",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Assembly Line",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "conchúr",
+      "locations": [
+        "Belfast"
+      ],
+      "locationRaw": "Belfast",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "29's Fell Shadow",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Strand Unit",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "lifewing",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Colin James Woods",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Mick Chillage",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Maverick",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Ocean Floor",
+      "locations": [
+        "Galway"
+      ],
+      "locationRaw": "Galway",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Dubdelay",
+      "locations": [],
+      "locationRaw": null,
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Róisin Berg",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Looming",
+      "locations": [
+        "Limerick"
+      ],
+      "locationRaw": "Limerick",
+      "genre": null,
+      "website": null,
+      "notes": null
+    },
+    {
+      "artist": "Sonic Womb",
+      "locations": [
+        "Dundalk"
+      ],
+      "locationRaw": "Dundalk",
+      "genre": null,
+      "website": null,
+      "notes": null
+    }
+  ]
+}

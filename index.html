@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ireland Music Map</title>
+  <meta name="description" content="An interactive map of Irish artists from the supplied database.">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIINfQ3ApkQ2uF6jM3j6z8sK7d0m6pG4m5M=" crossorigin="">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <div id="map" aria-label="Interactive map of Ireland"></div>
+
+    <header class="brand">
+      <div class="eyebrow">IRISH EXPERIMENTAL MUSIC</div>
+      <h1>Ireland Music Map</h1>
+      <p>Click a place to explore the artists connected to it.</p>
+    </header>
+
+    <aside class="info-panel" id="infoPanel" aria-live="polite">
+      <button class="close" id="closePanel" aria-label="Close">×</button>
+      <div class="panel-kicker" id="panelKicker">SELECT A PLACE</div>
+      <h2 id="panelTitle">Explore Ireland</h2>
+      <p id="panelDescription">Choose a marker on the map to see the artists in that location.</p>
+      <div id="artistList" class="artist-list"></div>
+    </aside>
+
+    <button class="unmapped" id="unmappedBtn">
+      Artists without an Ireland location <span id="unmappedCount"></span>
+    </button>
+
+    <div class="legend">
+      <span class="dot"></span>
+      <span>Artist location</span>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>

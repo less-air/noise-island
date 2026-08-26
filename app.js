@@ -1,28 +1,23 @@
-const IMAGE_WIDTH = 1538;
-const IMAGE_HEIGHT = 2048;
+// Noise Island — Ireland Music Map
+// The supplied 1538×2048 PNG is the map coordinate system.
+// City positions are stored separately in city-positions.json as {x,y}.
+
+const W = 1538;
+const H = 2048;
 
 const map = L.map("map", {
   crs: L.CRS.Simple,
-  zoomControl: true,
-  minZoom: -2,
-  maxZoom: 3,
+  minZoom: -1.25,
+  maxZoom: 2.5,
   zoomSnap: 0.25,
-  maxBounds: [
-    [-60, -60],
-    [IMAGE_HEIGHT + 60, IMAGE_WIDTH + 60]
-  ],
-  maxBoundsViscosity: 0.9,
-  attributionControl: false
+  zoomDelta: 0.5,
+  zoomControl: true,
+  attributionControl: false,
+  maxBounds: [[-80, -80], [H + 80, W + 80]],
+  maxBoundsViscosity: 0.9
 });
 
-// -----------------------------------------------------------------------------
-// CUSTOM PNG MAP
-// -----------------------------------------------------------------------------
-
-const imageBounds = [
-  [0, 0],
-  [IMAGE_HEIGHT, IMAGE_WIDTH]
-];
+const imageBounds = [[0, 0], [H, W]];
 
 L.imageOverlay("noiseisland.png", imageBounds, {
   opacity: 1,
@@ -30,1051 +25,394 @@ L.imageOverlay("noiseisland.png", imageBounds, {
   zIndex: 1
 }).addTo(map);
 
-map.fitBounds(imageBounds, {
-  padding: [18, 18]
-});
-
-
-// -----------------------------------------------------------------------------
-// UI HELPERS
-// -----------------------------------------------------------------------------
+map.fitBounds(imageBounds, { padding: [20, 20] });
 
 const $ = id => document.getElementById(id);
-
 const panel = $("infoPanel");
 const title = $("panelTitle");
 const kicker = $("panelKicker");
 const description = $("panelDescription");
 const artistList = $("artistList");
 
-function esc(value) {
-  return String(value ?? "").replace(
-    /[&<>"']/g,
-    character => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    })[character]
-  );
+function esc(v) {
+  return String(v ?? "").replace(/[&<>"']/g, c => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[c]);
 }
 
-function tagText(value) {
-  return String(value || "")
+function tagText(v) {
+  return String(v || "")
     .trim()
     .replace(/^#+/, "")
     .replace(/\s+/g, "")
     .replace(/[^A-Za-z0-9À-ÿ_-]/g, "");
 }
 
-function tags(artist) {
+function tags(a) {
   const result = [];
 
-  if (artist.genre) {
-    artist.genre
+  if (a.genre) {
+    a.genre
       .split(/[,;|/]+/)
-      .map(value => value.trim())
+      .map(x => x.trim())
       .filter(Boolean)
-      .forEach(value => {
-        result.push("#" + tagText(value));
-      });
+      .forEach(x => result.push("#" + tagText(x)));
   }
 
-  (artist.locationTags || [])
+  (a.locationTags || [])
     .filter(Boolean)
-    .forEach(value => {
-      result.push("#" + tagText(value));
-    });
+    .forEach(x => result.push("#" + tagText(x)));
 
-  return [...new Set(result)].filter(value => value !== "#");
+  return [...new Set(result)].filter(x => x !== "#");
 }
 
-function artistCard(artist) {
-  const artistTags = tags(artist);
+function card(a) {
+  const t = tags(a);
 
-  return `
-    <article class="artist-card">
-
-      <div class="artist-name">
-        ${esc(artist.artist)}
-      </div>
-
-      ${
-        artistTags.length
-          ? `
-            <div class="hashtags">
-              ${artistTags
-                .map(tag => `<span class="tag">${esc(tag)}</span>`)
-                .join("")}
-            </div>
-          `
-          : ""
-      }
-
-      ${
-        artist.notes
-          ? `
-            <div class="artist-note">
-              ${esc(artist.notes)}
-            </div>
-          `
-          : ""
-      }
-
-      ${
-        artist.link
-          ? `
-            <a
-              class="artist-link"
-              href="${esc(artist.link)}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Visit artist link ↗
-            </a>
-          `
-          : `
-            <div class="no-link">
-              No link provided in the spreadsheet.
-            </div>
-          `
-      }
-
-    </article>
-  `;
+  return `<article class="artist-card">
+    <div class="artist-name">${esc(a.artist)}</div>
+    ${t.length ? `<div class="hashtags">${t.map(x => `<span class="tag">${esc(x)}</span>`).join("")}</div>` : ""}
+    ${a.notes ? `<div class="artist-note">${esc(a.notes)}</div>` : ""}
+    ${a.link
+      ? `<a class="artist-link" href="${esc(a.link)}" target="_blank" rel="noopener noreferrer">Visit artist link ↗</a>`
+      : `<div class="no-link">No link provided in the spreadsheet.</div>`}
+  </article>`;
 }
 
 function openPanel() {
   panel.classList.add("open");
 }
 
-$("closePanel").onclick = () => {
-  panel.classList.remove("open");
-};
-
-$("resetMap").onclick = () => {
-  map.fitBounds(imageBounds, {
-    padding: [18, 18]
-  });
-};
-
+$("closePanel").onclick = () => panel.classList.remove("open");
+$("resetMap").onclick = () => map.fitBounds(imageBounds, { padding: [20, 20] });
 
 // -----------------------------------------------------------------------------
-// CITY POSITION SYSTEM
+// CITY POSITION CONFIGURATION
 // -----------------------------------------------------------------------------
 
 let CITY_POSITIONS = {};
 
-/*
-  city-positions.json uses:
-
-  {
-    "Dublin": {
-      "x": 1050,
-      "y": 820
-    }
-  }
-
-  x = horizontal position on the PNG
-  y = vertical position on the PNG
-
-  Leaflet's CRS.Simple uses [y, x].
-*/
-
 function cityPoint(cityName) {
-  const position = CITY_POSITIONS[cityName];
+  const p = CITY_POSITIONS[cityName];
 
-  if (!position) {
-    console.warn(`No position found for ${cityName}`);
+  if (!p || typeof p.x !== "number" || typeof p.y !== "number") {
+    console.warn(`No valid position found for ${cityName}`);
     return null;
   }
 
-  return [
-    position.y,
-    position.x
-  ];
+  // CRS.Simple uses [y,x].
+  return [p.y, p.x];
 }
 
+// -----------------------------------------------------------------------------
+// DEVELOPER POSITIONING MODE
+// -----------------------------------------------------------------------------
+
+let developerMode = false;
+let positionMarker = null;
+
+const devPanel = document.createElement("div");
+devPanel.id = "devPosition";
+devPanel.innerHTML = `
+  <strong>POSITIONING MODE</strong>
+  <div class="dev-help">Press P to toggle. Click the map to select a PNG pixel.</div>
+  <div id="devCoords">x: —, y: —</div>
+  <div id="devCity">No city selected</div>
+  <pre id="devJson"></pre>
+  <div class="dev-buttons">
+    <button id="devCopy" type="button">Copy JSON</button>
+    <button id="devExit" type="button">Exit</button>
+  </div>
+`;
+document.body.appendChild(devPanel);
+
+function setDeveloperMode(enabled) {
+  developerMode = enabled;
+  devPanel.classList.toggle("visible", enabled);
+  document.body.classList.toggle("developer-mode", enabled);
+
+  if (!enabled && positionMarker) {
+    map.removeLayer(positionMarker);
+    positionMarker = null;
+  }
+}
+
+function selectDeveloperPosition(latlng) {
+  const x = Math.round(latlng.lng);
+  const y = Math.round(latlng.lat);
+
+  $("devCoords").textContent = `x: ${x}, y: ${y}`;
+
+  const cityName = window.prompt(
+    `Selected PNG position: x ${x}, y ${y}\n\nEnter the city name, or Cancel to inspect only.`
+  );
+
+  const entry = cityName && cityName.trim()
+    ? { [cityName.trim()]: { x, y } }
+    : { x, y };
+
+  $("devCity").textContent = cityName && cityName.trim()
+    ? cityName.trim()
+    : "Coordinate only";
+
+  $("devJson").textContent = JSON.stringify(entry, null, 2);
+  devPanel.dataset.json = JSON.stringify(entry, null, 2);
+  devPanel.classList.add("has-position");
+
+  if (positionMarker) map.removeLayer(positionMarker);
+
+  positionMarker = L.marker([y, x], {
+    interactive: false,
+    zIndexOffset: 5000,
+    icon: L.divIcon({
+      className: "developer-crosshair",
+      iconSize: [30, 30],
+      iconAnchor: [15, 15],
+      html: `<div class="crosshair"><span></span></div>`
+    })
+  }).addTo(map);
+}
+
+map.on("click", e => {
+  if (developerMode) selectDeveloperPosition(e.latlng);
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key.toLowerCase() !== "p") return;
+
+  const active = document.activeElement;
+  if (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA")) return;
+
+  setDeveloperMode(!developerMode);
+});
+
+$("devExit").onclick = () => setDeveloperMode(false);
+
+$("devCopy").onclick = async () => {
+  const text = devPanel.dataset.json;
+  if (!text) return;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    $("devCopy").textContent = "Copied!";
+    setTimeout(() => { $("devCopy").textContent = "Copy JSON"; }, 1000);
+  } catch {
+    window.prompt("Copy this JSON:", text);
+  }
+};
 
 // -----------------------------------------------------------------------------
-// LOAD DATA
+// LOAD ARTIST DATA + CITY POSITIONS
 // -----------------------------------------------------------------------------
 
 Promise.all([
-  fetch("data.json").then(response => {
-    if (!response.ok) {
-      throw new Error("Could not load data.json");
-    }
-
-    return response.json();
+  fetch("data.json").then(r => {
+    if (!r.ok) throw new Error(`Could not load data.json (${r.status})`);
+    return r.json();
   }),
-
-  fetch("city-positions.json").then(response => {
-    if (!response.ok) {
-      throw new Error("Could not load city-positions.json");
-    }
-
-    return response.json();
+  fetch("city-positions.json").then(r => {
+    if (!r.ok) throw new Error(`Could not load city-positions.json (${r.status})`);
+    return r.json();
   })
+])
+.then(([data, positions]) => {
+  CITY_POSITIONS = positions;
 
-]).then(([data, cityPositions]) => {
+  // v5's build_data.py produces { artists: [...] }.
+  const artists = Array.isArray(data.artists) ? data.artists : [];
 
-  CITY_POSITIONS = cityPositions;
+  if (!artists.length) {
+    throw new Error("data.json loaded, but its artists array is empty.");
+  }
 
-  // ---------------------------------------------------------------------------
-  // GROUP ARTISTS BY CITY
-  // ---------------------------------------------------------------------------
-
+  const cityNames = Object.keys(CITY_POSITIONS);
   const byCity = new Map();
 
-  data.artists.forEach(artist => {
-
-    (artist.locations || []).forEach(city => {
-
-      if (!byCity.has(city)) {
-        byCity.set(city, []);
-      }
-
-      byCity.get(city).push(artist);
-
+  artists.forEach(a => {
+    (a.locations || []).forEach(city => {
+      if (!byCity.has(city)) byCity.set(city, []);
+      byCity.get(city).push(a);
     });
-
   });
 
-
-  // ---------------------------------------------------------------------------
-  // ARTIST PANEL
-  // ---------------------------------------------------------------------------
-
-  function openArtist(artist, flyToArtist = true) {
-
+  function openArtist(a) {
     kicker.textContent = "ARTIST";
-
-    title.textContent = artist.artist;
-
-    description.textContent =
-      artist.locationRaw
-        ? `Location: ${artist.locationRaw}`
-        : "No Ireland location recorded.";
-
-    artistList.innerHTML = artistCard(artist);
-
+    title.textContent = a.artist;
+    description.textContent = a.locationRaw
+      ? `Location: ${a.locationRaw}`
+      : "No Ireland location recorded.";
+    artistList.innerHTML = card(a);
     openPanel();
 
-
-    if (
-      flyToArtist &&
-      artist.locations &&
-      artist.locations.length
-    ) {
-
-      const cityName = artist.locations[0];
-
-      const point = cityPoint(cityName);
-
-      if (point) {
-
-        map.flyTo(
-          point,
-          8.4,
-          {
-            duration: 0.6
-          }
-        );
-
-      }
-
-    }
-
+    const city = a.locations?.[0];
+    const point = city && cityPoint(city);
+    if (point) map.flyTo(point, 1.25, { duration: 0.55 });
   }
 
-
-  // ---------------------------------------------------------------------------
-  // CITY PANEL
-  // ---------------------------------------------------------------------------
-
-  function openCity(city, artists) {
-
+  function openCity(name, list) {
     kicker.textContent = "ARTISTS IN";
-
-    title.textContent = city.name;
-
-    description.textContent =
-      `${artists.length} artist${artists.length === 1 ? "" : "s"} connected to this place.`;
-
-    artistList.innerHTML =
-      artists.length
-        ? artists.map(artistCard).join("")
-        : `
-          <div class="artist-card">
-            No artists mapped here.
-          </div>
-        `;
-
+    title.textContent = name;
+    description.textContent = `${list.length} artist${list.length === 1 ? "" : "s"} connected to this place.`;
+    artistList.innerHTML = list.map(card).join("") || `<div class="artist-card">No artists mapped here.</div>`;
     openPanel();
 
+    const point = cityPoint(name);
+    if (point) map.flyTo(point, 1.05, { duration: 0.55 });
 
-    const point = cityPoint(city.name);
-
-    if (point) {
-
-      map.flyTo(
-        point,
-        8.1,
-        {
-          duration: 0.6
-        }
-      );
-
-    }
-
-
-    // Clicking an artist card opens the individual artist.
-    artistList
-      .querySelectorAll(".artist-card")
-      .forEach((element, index) => {
-
-        element.onclick = event => {
-
-          // Don't intercept the external website button.
-          if (event.target.closest("a")) {
-            return;
-          }
-
-          openArtist(
-            artists[index],
-            false
-          );
-
-        };
-
-        element.style.cursor = "pointer";
-
-      });
-
+    artistList.querySelectorAll(".artist-card").forEach((el, i) => {
+      el.onclick = e => {
+        if (!e.target.closest("a")) openArtist(list[i]);
+      };
+      el.style.cursor = "pointer";
+    });
   }
-
 
   // ---------------------------------------------------------------------------
   // CITY MARKERS
   // ---------------------------------------------------------------------------
 
-  data.cities.forEach(city => {
+  cityNames.forEach(name => {
+    const pos = cityPoint(name);
+    if (!pos) return;
 
-    const point = cityPoint(city.name);
+    const list = byCity.get(name) || [];
 
-    if (!point) {
-      return;
-    }
-
-    const artists = byCity.get(city.name) || [];
-
-    const cityIcon = L.divIcon({
-
+    const icon = L.divIcon({
       className: "",
-
       iconSize: [1, 1],
-
       iconAnchor: [0, 0],
-
-      html: `
-        <div class="city-marker">
-
-          <div class="city-core"></div>
-
-          <div class="city-label">
-            ${esc(city.name)} · ${artists.length}
-          </div>
-
-        </div>
-      `
-
+      html: `<div class="city-marker">
+        <div class="city-core"></div>
+        <div class="city-label">${esc(name)} · ${list.length}</div>
+      </div>`
     });
 
-
-    L.marker(point, {
-
-      icon: cityIcon,
-
-      zIndexOffset: 1000
-
-    })
-
+    L.marker(pos, { icon, zIndexOffset: 1000 })
       .addTo(map)
-
-      .on(
-        "click",
-        () => openCity(city, artists)
-      );
-
+      .on("click", () => openCity(name, list));
   });
 
-
   // ---------------------------------------------------------------------------
-  // ARTIST NODE CONSTELLATIONS
+  // ARTIST NODES
   // ---------------------------------------------------------------------------
 
-  data.cities.forEach(city => {
+  cityNames.forEach(name => {
+    const cityPos = cityPoint(name);
+    if (!cityPos) return;
 
-    const cityPointPosition = cityPoint(city.name);
+    const list = byCity.get(name) || [];
+    const radius = 48 + Math.min(list.length, 12) * 3;
 
-    if (!cityPointPosition) {
-      return;
-    }
+    list.forEach((a, i) => {
+      const angle = -Math.PI / 2 + i * 2.3999632297;
+      const ring = 1 + Math.floor(i / 8) * 0.26;
+      const y = cityPos[0] + Math.cos(angle) * radius * ring;
+      const x = cityPos[1] + Math.sin(angle) * radius * ring;
 
-    const artists = byCity.get(city.name) || [];
+      L.polyline([cityPos, [y, x]], {
+        color: "#d8ff58",
+        weight: 1,
+        opacity: 0.28,
+        interactive: false
+      }).addTo(map);
 
-    /*
-      Nodes are distributed around their city using the golden angle.
-
-      This creates a more organic constellation instead of a rigid circle.
-    */
-
-    const baseDistance =
-      42 +
-      Math.min(artists.length, 12) * 3;
-
-    const horizontalDistance =
-      baseDistance * 1.45;
-
-
-    artists.forEach((artist, index) => {
-
-      const angle =
-        -Math.PI / 2 +
-        index * 2.399963229728653;
-
-      const ring =
-        1 +
-        Math.floor(index / 8) * 0.24;
-
-
-      const y =
-        cityPointPosition[0] +
-        Math.cos(angle) *
-        baseDistance *
-        ring;
-
-      const x =
-        cityPointPosition[1] +
-        Math.sin(angle) *
-        horizontalDistance *
-        ring;
-
-
-      // Connecting line from city to artist.
-      L.polyline(
-        [
-          cityPointPosition,
-          [y, x]
-        ],
-        {
-          color: "#d8ff58",
-          weight: 1,
-          opacity: 0.28,
-          interactive: false,
-          className: "node-line"
-        }
-      ).addTo(map);
-
-
-      const artistIcon = L.divIcon({
-
+      const icon = L.divIcon({
         className: "",
-
         iconSize: [1, 1],
-
         iconAnchor: [0, 0],
-
-        html: `
-          <div class="artist-node">
-
-            <div class="artist-node-dot"></div>
-
-            <div class="artist-node-label">
-              ${esc(artist.artist)}
-            </div>
-
-          </div>
-        `
-
+        html: `<div class="artist-node">
+          <div class="artist-node-dot"></div>
+          <div class="artist-node-label">${esc(a.artist)}</div>
+        </div>`
       });
 
-
-      L.marker(
-        [y, x],
-        {
-          icon: artistIcon,
-          zIndexOffset: 300
-        }
-      )
-
+      L.marker([y, x], { icon, zIndexOffset: 300 })
         .addTo(map)
-
-        .on(
-          "click",
-          () => openArtist(artist)
-        );
-
+        .on("click", () => openArtist(a));
     });
-
   });
 
-
   // ---------------------------------------------------------------------------
-  // TOGGLE ARTIST LABELS
+  // LABEL TOGGLE
   // ---------------------------------------------------------------------------
 
-  let labelsVisible = true;
-
+  let labels = true;
   $("toggleLabels").onclick = () => {
-
-    labelsVisible = !labelsVisible;
-
-    $("toggleLabels")
-      .classList
-      .toggle(
-        "active",
-        labelsVisible
-      );
-
-    document
-      .querySelectorAll(".artist-node-label")
-      .forEach(label => {
-
-        label.classList.toggle(
-          "hidden",
-          !labelsVisible
-        );
-
-      });
-
+    labels = !labels;
+    $("toggleLabels").classList.toggle("active", labels);
+    document.querySelectorAll(".artist-node-label").forEach(el => {
+      el.classList.toggle("hidden", !labels);
+    });
   };
-
 
   // ---------------------------------------------------------------------------
   // UNMAPPED ARTISTS
   // ---------------------------------------------------------------------------
 
-  const unmappedArtists =
-    data.artists.filter(
-      artist =>
-        !(artist.locations || []).length
-    );
-
-  $("unmappedCount").textContent =
-    unmappedArtists.length;
-
+  const unmapped = artists.filter(a => !(a.locations || []).length);
+  $("unmappedCount").textContent = unmapped.length;
 
   $("unmappedBtn").onclick = () => {
-
     kicker.textContent = "OTHER ARTISTS";
-
     title.textContent = "Unmapped";
-
-    description.textContent =
-      `${unmappedArtists.length} artists have no recognised map location.`;
-
-    artistList.innerHTML =
-      unmappedArtists
-        .map(artistCard)
-        .join("");
-
+    description.textContent = `${unmapped.length} artists have no recognised map location.`;
+    artistList.innerHTML = unmapped.map(card).join("");
     openPanel();
-
   };
-
 
   // ---------------------------------------------------------------------------
   // SEARCH
   // ---------------------------------------------------------------------------
 
   const searchable = [
-
-    ...data.cities.map(city => ({
-      type: "city",
-      name: city.name,
-      value: city
-    })),
-
-    ...data.artists.map(artist => ({
-      type: "artist",
-      name: artist.artist,
-      value: artist
-    }))
-
+    ...cityNames.map(name => ({ type: "city", name })),
+    ...artists.map(a => ({ type: "artist", name: a.artist, value: a }))
   ];
 
-
-  $("search").addEventListener(
-    "input",
-    event => {
-
-      const query =
-        event.target.value
-          .trim()
-          .toLowerCase();
-
-      const resultsBox =
-        $("searchResults");
-
-
-      if (!query) {
-
-        resultsBox.classList.remove("open");
-
-        resultsBox.innerHTML = "";
-
-        return;
-
-      }
-
-
-      const results =
-        searchable
-          .filter(item =>
-            item.name
-              .toLowerCase()
-              .includes(query)
-          )
-          .slice(0, 12);
-
-
-      resultsBox.innerHTML =
-        results.length
-
-          ? results.map((item, index) => `
-              <div
-                class="result"
-                data-index="${index}"
-              >
-                <strong>
-                  ${esc(item.name)}
-                </strong>
-
-                <span>
-                  ${item.type}
-                </span>
-
-              </div>
-            `).join("")
-
-          : `
-            <div class="result">
-              <strong>No matches</strong>
-            </div>
-          `;
-
-
-      resultsBox.classList.add("open");
-
-
-      resultsBox
-        .querySelectorAll("[data-index]")
-        .forEach(element => {
-
-          element.onclick = () => {
-
-            const item =
-              results[
-                Number(element.dataset.index)
-              ];
-
-
-            if (item.type === "city") {
-
-              openCity(
-                item.value,
-                byCity.get(item.value.name) || []
-              );
-
-            } else {
-
-              openArtist(item.value);
-
-            }
-
-
-            resultsBox.classList.remove("open");
-
-            $("search").value = "";
-
-          };
-
-        });
-
-    }
-  );
-
-
-  // ===========================================================================
-  // DEVELOPER POSITIONING MODE
-  // ===========================================================================
-
-  /*
-    Press P to toggle positioning mode.
-
-    In positioning mode:
-
-      1. Click anywhere on the PNG.
-      2. The exact x/y pixel coordinate is displayed.
-      3. Enter a city name if you want a ready-to-paste JSON entry.
-      4. Copy the generated JSON.
-
-    The browser cannot directly modify the GitHub repository, so this tool
-    deliberately produces the JSON for you to paste into city-positions.json.
-  */
-
-
-  let developerMode = false;
-
-  const developerPanel =
-    document.createElement("div");
-
-  developerPanel.id =
-    "devPosition";
-
-  developerPanel.innerHTML = `
-
-    <strong>
-      POSITIONING MODE
-    </strong>
-
-    <div id="devInstructions">
-      Alt/Option-click the map
-    </div>
-
-    <div id="devCoords">
-      No position selected
-    </div>
-
-    <div id="devCity">
-      No city selected
-    </div>
-
-    <pre id="devJson"></pre>
-
-    <div class="dev-buttons">
-
-      <button id="devCopy">
-        Copy JSON
-      </button>
-
-      <button id="devClose">
-        Exit
-      </button>
-
-    </div>
-
-  `;
-
-
-  document.body.appendChild(
-    developerPanel
-  );
-
-
-  function setDeveloperPosition(latlng) {
-
-    const x =
-      Math.round(latlng.lng);
-
-    const y =
-      Math.round(latlng.lat);
-
-
-    $("devCoords").textContent =
-      `x: ${x}, y: ${y}`;
-
-
-    const cityName =
-      prompt(
-        `Position selected at x: ${x}, y: ${y}.
-
-Enter the city name, or press Cancel to only inspect the coordinates.`
-      );
-
-
-    if (!cityName) {
-
-      $("devCity").textContent =
-        "No city selected";
-
-      $("devJson").textContent =
-        JSON.stringify(
-          {
-            x,
-            y
-          },
-          null,
-          2
-        );
-
-      developerPanel.classList.add("has-position");
-
-      return;
-
-    }
-
-
-    const cleanCityName =
-      cityName.trim();
-
-
-    $("devCity").textContent =
-      cleanCityName;
-
-
-    const jsonEntry = {
-
-      [cleanCityName]: {
-        x,
-        y
-      }
-
-    };
-
-
-    $("devJson").textContent =
-      JSON.stringify(
-        jsonEntry,
-        null,
-        2
-      );
-
-
-    developerPanel.dataset.json =
-      JSON.stringify(
-        jsonEntry,
-        null,
-        2
-      );
-
-
-    developerPanel.classList.add(
-      "has-position"
-    );
-
-
-    // Temporary visual crosshair.
-    if (window.positionMarker) {
-
-      map.removeLayer(
-        window.positionMarker
-      );
-
-    }
-
-
-    window.positionMarker =
-      L.marker(
-        [y, x],
-        {
-          icon: L.divIcon({
-
-            className:
-              "developer-crosshair",
-
-            iconSize: [30, 30],
-
-            iconAnchor: [15, 15],
-
-            html: `
-              <div class="crosshair">
-                <span></span>
-              </div>
-            `
-
-          }),
-
-          zIndexOffset: 5000,
-
-          interactive: false
-
-        }
-      ).addTo(map);
-
-  }
-
-
-  map.on(
-    "click",
-    event => {
-
-      if (!developerMode) {
-        return;
-      }
-
-
-      setDeveloperPosition(
-        event.latlng
-      );
-
-    }
-  );
-
-
-  function toggleDeveloperMode() {
-
-    developerMode =
-      !developerMode;
-
-
-    developerPanel.classList.toggle(
-      "visible",
-      developerMode
-    );
-
-
-    document.body.classList.toggle(
-      "developer-mode",
-      developerMode
-    );
-
-
-    if (!developerMode) {
-
-      developerPanel.classList.remove(
-        "has-position"
-      );
-
-    }
-
-  }
-
-
-  document.addEventListener(
-    "keydown",
-    event => {
-
-      // P toggles developer mode.
-      if (
-        event.key.toLowerCase() === "p" &&
-        !event.ctrlKey &&
-        !event.metaKey &&
-        !event.altKey
-      ) {
-
-        // Don't trigger while typing in search.
-        if (
-          document.activeElement &&
-          (
-            document.activeElement.tagName === "INPUT" ||
-            document.activeElement.tagName === "TEXTAREA"
-          )
-        ) {
-          return;
-        }
-
-
-        toggleDeveloperMode();
-
-      }
-
-    }
-  );
-
-
-  // Alt/Option-click also works as a shortcut.
-  map.getContainer().addEventListener(
-    "click",
-    event => {
-
-      if (!event.altKey) {
-        return;
-      }
-
-
-      if (!developerMode) {
-        developerMode = true;
-
-        developerPanel.classList.add(
-          "visible"
-        );
-
-        document.body.classList.add(
-          "developer-mode"
-        );
-      }
-
-    },
-    true
-  );
-
-
-  $("devClose").onclick = () => {
-
-    developerMode = false;
-
-    developerPanel.classList.remove(
-      "visible"
-    );
-
-    document.body.classList.remove(
-      "developer-mode"
-    );
-
-  };
-
-
-  $("devCopy").onclick = async () => {
-
-    const text =
-      developerPanel.dataset.json;
-
-
-    if (!text) {
+  $("search").addEventListener("input", e => {
+    const q = e.target.value.trim().toLowerCase();
+    const box = $("searchResults");
+
+    if (!q) {
+      box.classList.remove("open");
+      box.innerHTML = "";
       return;
     }
 
+    const results = searchable
+      .filter(x => x.name.toLowerCase().includes(q))
+      .slice(0, 12);
 
-    try {
+    box.innerHTML = results.length
+      ? results.map((x, i) => `<div class="result" data-i="${i}"><strong>${esc(x.name)}</strong><span>${x.type}</span></div>`).join("")
+      : `<div class="result"><strong>No matches</strong></div>`;
 
-      await navigator.clipboard.writeText(
-        text
-      );
+    box.classList.add("open");
 
+    box.querySelectorAll("[data-i]").forEach(el => {
+      el.onclick = () => {
+        const result = results[Number(el.dataset.i)];
 
-      $("devCopy").textContent =
-        "Copied!";
+        if (result.type === "city") {
+          openCity(result.name, byCity.get(result.name) || []);
+        } else {
+          openArtist(result.value);
+        }
 
-
-      setTimeout(
-        () => {
-          $("devCopy").textContent =
-            "Copy JSON";
-        },
-        1000
-      );
-
-
-    } catch (error) {
-
-      // Fallback for browsers where
-      // clipboard access is unavailable.
-      window.prompt(
-        "Copy this JSON:",
-        text
-      );
-
-    }
-
-  };
-
-
-}).catch(error => {
-
-  console.error(error);
-
+        box.classList.remove("open");
+        $("search").value = "";
+      };
+    });
+  });
+})
+.catch(err => {
+  console.error(err);
   kicker.textContent = "ERROR";
-
-  title.textContent =
-    "Map data could not load";
-
-  description.textContent =
-    error.message;
-
+  title.textContent = "Map data could not load";
+  description.textContent = err.message;
   openPanel();
-
 });

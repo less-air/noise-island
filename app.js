@@ -312,9 +312,9 @@ Promise.all([
       const x = cityPos[1] + Math.sin(angle) * radius * ring;
 
       L.polyline([cityPos, [y, x]], {
-        color: "#d8ff58",
-        weight: 1,
-        opacity: 0.28,
+        color: "#000000",
+        weight: 2,
+        opacity: 0.75,
         interactive: false
       }).addTo(map);
 

@@ -1,6 +1,4 @@
-// Noise Island — Ireland Music Map
-// The supplied 1538×2048 PNG is the map coordinate system.
-// City positions are stored separately in city-positions.json as {x,y}.
+// Noise Island — Ireland's Experimental Music Map
 
 const W = 1538;
 const H = 2048;

@@ -14,7 +14,7 @@ $("resetMap").onclick=()=>map.fitBounds(imageBounds,{padding:[20,20]});
 
 
 const cities={
- Dublin:[1091,1266], Cork:[1824,649], Limerick:[440,580], Galway:[1145,489], Sligo:[643,655],
+ Dublin:[1091,1266], Cork:[1824,649], Limerick:[440,580], Galway:[1145,489], Sligo:[0,0],
  Kilkenny:[1436,1026], Dundalk:[764,1227], Belfast:[470,1346], Leitrim:[790,789]
 };
 

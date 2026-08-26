@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Noise Island — Ireland Music Map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+</head><body><main class="app">
+<div id="map"></div>
+<header class="brand"><div class="eyebrow">IRISH MUSIC MAP</div><h1>Noise Island</h1><p>Explore artists by location.</p></header>
+<div class="controls"><button id="resetMap">Reset view</button><button id="toggleLabels" class="active">Artist names</button></div>
+<div class="search-wrap"><input id="search" type="search" placeholder="Search artist or city…"><div id="searchResults" class="search-results"></div></div>
+<aside id="infoPanel" class="info-panel"><button id="closePanel" class="close">×</button><div id="panelKicker" class="panel-kicker">SELECT A PLACE</div><h2 id="panelTitle">Explore Ireland</h2><p id="panelDescription">Click a city or an artist node.</p><div id="artistList" class="artist-list"></div></aside>
+<button id="unmappedBtn" class="unmapped">Other artists <span id="unmappedCount"></span></button>
+</main><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="app.js"></script></body></html>

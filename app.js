@@ -1,5 +1,3 @@
-// IMPORTANT: this version uses Leaflet's CRS.Simple instead of geographic projection.
-// That makes the supplied 1538×2048 PNG the exact canvas: no stretching, cropping or tile map underneath it.
 const W=1538, H=2048;
 const map=L.map("map",{crs:L.CRS.Simple,minZoom:-1.25,maxZoom:2.5,zoomSnap:.25,zoomDelta:.5,zoomControl:true,attributionControl:false,maxBounds:[[-80,-80],[H+80,W+80]],maxBoundsViscosity:.9});
 const imageBounds=[[0,0],[H,W]];
@@ -14,12 +12,10 @@ function openPanel(){panel.classList.add("open")}
 $("closePanel").onclick=()=>panel.classList.remove("open");
 $("resetMap").onclick=()=>map.fitBounds(imageBounds,{padding:[20,20]});
 
-// Approximate city placement on the custom artwork. These are deliberately kept in the image's
-// own coordinate system, so the artwork never changes shape. If you want pixel-perfect city dots,
-// edit these [y,x] positions after viewing the map.
+
 const cities={
- Dublin:[760,1015], Cork:[1445,680], Limerick:[1245,610], Galway:[1085,405], Sligo:[780,445],
- Kilkenny:[1210,870], Dundalk:[410,1035], Belfast:[300,1095], Leitrim:[720,600]
+ Dublin:[1266,1091], Cork:[649,1824], Limerick:[597,1440], Galway:[489,1145], Sligo:[655,643],
+ Kilkenny:[1026,1436], Dundalk:[1227,764], Belfast:[1346,470], Leitrim:[789,790]
 };
 
 fetch("data.json").then(r=>r.json()).then(data=>{

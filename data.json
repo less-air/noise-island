@@ -411,12 +411,12 @@
     },
     {
       "artist": "Jonathan Crean",
-      "locationRaw": "Sligo",
+      "locationRaw": "",
       "locations": [
-        "Sligo"
+        ""
       ],
       "locationTags": [
-        "Sligo"
+        ""
       ],
       "genre": "",
       "link": "",

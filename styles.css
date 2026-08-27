@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
 :root{--bg:#000000;--ink:#fd96fd;--pink:#FE84FD;--lime:#422142;--panel:rgba(0, 0, 0, 0.96);--line:#422142;--muted:rgba(246,241,235,.64)}
-*{box-sizing:border-box}html,body,#map,.app{width:100%;height:100%;margin:0}body{overflow:hidden;background:var(--bg);color:var(--ink);font-family:"DM Sans",sans-serif}
+*{box-sizing:border-box}html,body,#map,.app{width:100%;height:100%;margin:0}body{overflow:hidden;background:var(--bg);color:var(--ink);font-family:"Inconsolata",monospace}
 #map{background:#000000}
 
 .leaflet-image-layer{image-rendering:auto}

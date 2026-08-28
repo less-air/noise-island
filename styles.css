@@ -35,7 +35,7 @@
 .unmapped span{display:inline-grid;place-items:center;margin-left:7px;min-width:22px;height:22px;border-radius:99px;background:var(--lime);color:#170d17}
 .city-marker,.artist-node{transform:translate(-50%,-50%);cursor:pointer}
 .city-core{width:10px;height:10px;border-radius:50%;background:var(--lime);border:3px solid #000000;box-shadow:0 0 0 6px #422142}
-.city-label{position:absolute;left:16px;top:-5px;padding:4px 6px;border-radius:4px;background:#fe84fe7c;border:0px solid rgba(5, 5, 5, 0);color:var(--lime);font-size:20px;white-space:nowrap;pointer-events:none}
+.city-label{position:absolute;left:16px;top:-5px;padding:4px 6px;border-radius:4px;background:#fe84fe;border:0px solid rgba(5, 5, 5, 0);color:var(--lime);font-size:20px;white-space:nowrap;pointer-events:none}
 .artist-node{transition:transform .16s ease}
 .artist-node:hover{transform:translate(-50%,-50%) scale(1.16)}
 .artist-node-dot{width:5px;height:5px;border-radius:50%;background:var(--lime);border:2px solid #000000;box-shadow:0 0 0 5px #241324}

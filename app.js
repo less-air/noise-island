@@ -414,3 +414,298 @@ Promise.all([
   description.textContent = err.message;
   openPanel();
 });
+
+// ======================================================
+// RADIO EPISODE PLAYER
+// ======================================================
+
+const radioPlayer = document.getElementById("radioPlayer");
+const audioPlayer = document.getElementById("audioPlayer");
+
+const currentEpisode =
+  document.getElementById("currentEpisode");
+
+const prevEpisode =
+  document.getElementById("prevEpisode");
+
+const playPause =
+  document.getElementById("playPause");
+
+const nextEpisode =
+  document.getElementById("nextEpisode");
+
+const progressBar =
+  document.getElementById("progressBar");
+
+const currentTime =
+  document.getElementById("currentTime");
+
+const remainingTime =
+  document.getElementById("remainingTime");
+
+let episodes = [];
+let currentEpisodeIndex = 0;
+
+
+// ------------------------------------------------------
+// LOAD EPISODES
+// ------------------------------------------------------
+
+fetch("episodes.json")
+  .then(response => {
+
+    if (!response.ok) {
+      throw new Error("Could not load episodes.json");
+    }
+
+    return response.json();
+
+  })
+  .then(data => {
+
+    episodes = data;
+
+    if (episodes.length) {
+      loadEpisode(0, false);
+    }
+
+  })
+  .catch(error => {
+
+    console.error(error);
+
+    currentEpisode.textContent =
+      "No episodes available";
+
+  });
+
+
+// ------------------------------------------------------
+// LOAD EPISODE
+// ------------------------------------------------------
+
+function loadEpisode(index, autoplay = false) {
+
+  if (!episodes.length) {
+    return;
+  }
+
+  // Wrap around.
+  if (index < 0) {
+    index = episodes.length - 1;
+  }
+
+  if (index >= episodes.length) {
+    index = 0;
+  }
+
+  currentEpisodeIndex = index;
+
+  const episode = episodes[index];
+
+  audioPlayer.src = episode.file;
+
+  currentEpisode.textContent =
+    episode.title || `Episode ${index + 1}`;
+
+  progressBar.value = 0;
+
+  currentTime.textContent = "0:00";
+
+  remainingTime.textContent = "-0:00";
+
+  if (autoplay) {
+
+    audioPlayer
+      .play()
+      .catch(() => {});
+
+  }
+
+  updatePlayButton();
+
+}
+
+
+// ------------------------------------------------------
+// PLAY / PAUSE
+// ------------------------------------------------------
+
+playPause.onclick = () => {
+
+  if (!audioPlayer.src) {
+    return;
+  }
+
+  if (audioPlayer.paused) {
+
+    audioPlayer
+      .play()
+      .catch(() => {});
+
+  } else {
+
+    audioPlayer.pause();
+
+  }
+
+};
+
+
+audioPlayer.addEventListener(
+  "play",
+  updatePlayButton
+);
+
+audioPlayer.addEventListener(
+  "pause",
+  updatePlayButton
+);
+
+
+function updatePlayButton() {
+
+  playPause.textContent =
+    audioPlayer.paused
+      ? "▶"
+      : "❚❚";
+
+}
+
+
+// ------------------------------------------------------
+// PREVIOUS
+// ------------------------------------------------------
+
+prevEpisode.onclick = () => {
+
+  loadEpisode(
+    currentEpisodeIndex - 1,
+    true
+  );
+
+};
+
+
+// ------------------------------------------------------
+// NEXT
+// ------------------------------------------------------
+
+nextEpisode.onclick = () => {
+
+  loadEpisode(
+    currentEpisodeIndex + 1,
+    true
+  );
+
+};
+
+
+// ------------------------------------------------------
+// AUTOMATIC NEXT EPISODE
+// ------------------------------------------------------
+
+audioPlayer.addEventListener(
+  "ended",
+  () => {
+
+    loadEpisode(
+      currentEpisodeIndex + 1,
+      true
+    );
+
+  }
+);
+
+
+// ------------------------------------------------------
+// PROGRESS
+// ------------------------------------------------------
+
+audioPlayer.addEventListener(
+  "loadedmetadata",
+  () => {
+
+    if (!Number.isFinite(audioPlayer.duration)) {
+      return;
+    }
+
+    progressBar.max =
+      audioPlayer.duration;
+
+    updateProgress();
+
+  }
+);
+
+
+audioPlayer.addEventListener(
+  "timeupdate",
+  updateProgress
+);
+
+
+function updateProgress() {
+
+  if (!Number.isFinite(audioPlayer.duration)) {
+    return;
+  }
+
+  progressBar.value =
+    audioPlayer.currentTime;
+
+  currentTime.textContent =
+    formatTime(audioPlayer.currentTime);
+
+  remainingTime.textContent =
+    "-" +
+    formatTime(
+      Math.max(
+        0,
+        audioPlayer.duration -
+        audioPlayer.currentTime
+      )
+    );
+
+}
+
+
+progressBar.addEventListener(
+  "input",
+  () => {
+
+    audioPlayer.currentTime =
+      Number(progressBar.value);
+
+  }
+);
+
+
+// ------------------------------------------------------
+// TIME FORMAT
+// ------------------------------------------------------
+
+function formatTime(seconds) {
+
+  if (!Number.isFinite(seconds)) {
+    return "0:00";
+  }
+
+  seconds = Math.max(
+    0,
+    Math.floor(seconds)
+  );
+
+  const minutes =
+    Math.floor(seconds / 60);
+
+  const remainingSeconds =
+    seconds % 60;
+
+  return (
+    minutes +
+    ":" +
+    String(remainingSeconds).padStart(2, "0")
+  );
+
+}

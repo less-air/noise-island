@@ -11,4 +11,45 @@
 <div class="search-wrap"><input id="search" type="search" placeholder="Search artist or city…" aria-label="Search artist or city"><div id="searchResults" class="search-results"></div></div>
 <aside id="infoPanel" class="info-panel"><button id="closePanel" class="close" aria-label="Close">×</button><div id="panelKicker" class="panel-kicker">SELECT A PLACE</div><h2 id="panelTitle">Explore Ireland</h2><p id="panelDescription">Click a city or an artist node.</p><div id="artistList" class="artist-list"></div></aside>
 <button id="unmappedBtn" class="unmapped">Other artists <span id="unmappedCount"></span></button>
+<div id="radioPlayer" class="radio-player">
+
+  <div class="radio-info">
+    <div class="radio-label">NOW PLAYING</div>
+    <div id="currentEpisode">Select an episode</div>
+  </div>
+
+  <button id="prevEpisode" class="player-button" aria-label="Previous episode">
+    ‹
+  </button>
+
+  <button id="playPause" class="player-button play-button" aria-label="Play">
+    ▶
+  </button>
+
+  <button id="nextEpisode" class="player-button" aria-label="Next episode">
+    ›
+  </button>
+
+  <div class="player-progress">
+
+    <span id="currentTime">0:00</span>
+
+    <input
+      id="progressBar"
+      type="range"
+      min="0"
+      max="100"
+      value="0"
+    >
+
+    <span id="remainingTime">-0:00</span>
+
+  </div>
+
+  <audio
+    id="audioPlayer"
+    preload="metadata"
+  ></audio>
+
+</div>
 </main><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="app.js"></script></body></html>

@@ -411,13 +411,9 @@
     },
     {
       "artist": "Jonathan Crean",
-      "locationRaw": "Mayo",
-      "locations": [
-        "Mayo"
-      ],
-      "locationTags": [
-        "Mayo"
-      ],
+      "locationRaw": "",
+      "locations": [],
+      "locationTags": [],
       "genre": "",
       "link": "",
       "notes": ""

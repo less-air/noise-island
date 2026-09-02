@@ -58,8 +58,8 @@
 #devJson{display:none;margin:8px 0;padding:8px;border-radius:7px;background:rgba(255,255,255,.05);color:var(--lime);font-size:10px;white-space:pre-wrap}
 #devPosition.has-position #devJson{display:block}
 .dev-buttons{display:flex;gap:7px}
-.dev-buttons button{border:1px solid rgba(216,255,88,.35);background:transparent;color:var(--lime);border-radius:999px;padding:6px 10px;cursor:pointer;font:600 10px "Inconsolata",monospace}
-.dev-buttons button:hover{background:rgba(216,255,88,.1)}
+.dev-buttons button{border:1px solid rgba(222, 88, 255, 0.35);background:transparent;color:var(--lime);border-radius:999px;padding:6px 10px;cursor:pointer;font:600 10px "Inconsolata",monospace}
+.dev-buttons button:hover{background:rgba(222, 88, 255, 0.1)}
 .developer-crosshair{background:transparent!important;border:0!important}
 .crosshair{width:30px;height:30px;position:relative}
 .crosshair::before,.crosshair::after{content:"";position:absolute;background:var(--lime)}
@@ -138,7 +138,7 @@
 
 .soundcloud-wrap {
   min-width: 0;
-  height: 46px;
+  height: 80px;
   overflow: hidden;
   border-radius: 7px;
 }
@@ -146,7 +146,7 @@
 #soundcloudPlayer {
   display: block;
   width: 100%;
-  height: 46px;
+  height: 80px;
   border: 0;
 }
 

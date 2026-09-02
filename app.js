@@ -5,10 +5,10 @@ const H = 2048;
 
 const map = L.map("map", {
   crs: L.CRS.Simple,
-  minZoom: -1.25,
+  minZoom: -1.75,
   maxZoom: 2.5,
   zoomSnap: 0.25,
-  zoomDelta: 0.5,
+  zoomDelta: 0.25,
   zoomControl: true,
   attributionControl: false,
   maxBounds: [[-80, -80], [H + 80, W + 80]],
@@ -220,7 +220,7 @@ Promise.all([
 .then(([data, positions]) => {
   CITY_POSITIONS = positions;
 
-  // v5's build_data.py produces { artists: [...] }.
+  // build_data.py produces { artists: [...] }.
   const artists = Array.isArray(data.artists) ? data.artists : [];
 
   if (!artists.length) {

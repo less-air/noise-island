@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parent
 df = pd.read_excel(ROOT / "Database.xlsx")
 df.columns = [str(c).strip() for c in df.columns]
 
-# city-positions.json is the source of truth for mappable places.
+# city-positions.json is the source for mappable places.
 positions = json.loads(
     (ROOT / "city-positions.json").read_text(encoding="utf-8")
 )
@@ -27,7 +27,7 @@ def normalize_city(value):
     if key in city_lookup:
         return city_lookup[key]
 
-    # Accept "County Mayo", "county clare", etc.
+    # Accept new locations.
     if key.startswith("county "):
         key = key[7:].strip()
         if key in city_lookup:

@@ -9,9 +9,9 @@
       "locationTags": [
         "Limerick"
       ],
-      "genre": "",
-      "link": "",
-      "notes": ""
+      "genre": "Ambient, Spoken Word",
+      "link": "https://less-air.github.io/orkid/about.html",
+      "notes": "Collective/Band"
     },
     {
       "artist": "Paddy Mulcahy",
@@ -22,9 +22,9 @@
       "locationTags": [
         "Limerick"
       ],
-      "genre": "",
-      "link": "",
-      "notes": ""
+      "genre": "Ambient, Drone",
+      "link": "www.paddymulcahy.com",
+      "notes": "Solo"
     },
     {
       "artist": "Melancholy Hill",
@@ -36,9 +36,9 @@
         "Limerick",
         "Hungary"
       ],
-      "genre": "",
-      "link": "",
-      "notes": ""
+      "genre": "Industrial, alternative rock",
+      "link": "https://melancholyhill.bandcamp.com/album/parts-of-me",
+      "notes": "Solo"
     },
     {
       "artist": "Robin Parmar",
@@ -49,9 +49,9 @@
       "locationTags": [
         "Limerick"
       ],
-      "genre": "",
-      "link": "",
-      "notes": ""
+      "genre": "Ambient, Drone, Noise",
+      "link": "http://robinparmar.com/",
+      "notes": "Solo"
     },
     {
       "artist": "Less Air",
@@ -62,9 +62,9 @@
       "locationTags": [
         "Limerick"
       ],
-      "genre": "",
-      "link": "",
-      "notes": ""
+      "genre": "Ambient, Minimal Techno",
+      "link": "https://morespores.bandcamp.com/",
+      "notes": "Solo"
     },
     {
       "artist": "These Quiet Hours",
@@ -75,8 +75,8 @@
       "locationTags": [
         "Cork"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Ambient, Post-Rock",
+      "link": "https://thesequiethours.ie",
       "notes": ""
     },
     {
@@ -88,17 +88,21 @@
       "locationTags": [
         "Limerick"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Folk, Vocal, World Music",
+      "link": "https://www.instagram.com/kateryna.horbenkova/",
       "notes": ""
     },
     {
       "artist": "oootini",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Cork",
+      "locations": [
+        "Cork"
+      ],
+      "locationTags": [
+        "Cork"
+      ],
+      "genre": "Ambient, Drone",
+      "link": "https://soundcloud.com/oootini",
       "notes": ""
     },
     {
@@ -110,9 +114,9 @@
       "locationTags": [
         "Leitrim"
       ],
-      "genre": "",
-      "link": "",
-      "notes": "Runs the Drumnadubber Artist Studios"
+      "genre": "Avant-garde, musique concrete",
+      "link": "https://nataliabeylis.bandcamp.com",
+      "notes": "Drumnadubber Artist Studios"
     },
     {
       "artist": "Last Eden",
@@ -126,16 +130,20 @@
         "Dublin"
       ],
       "genre": "Industrial",
-      "link": "",
+      "link": "https://www.instagram.com/last__eden/",
       "notes": ""
     },
     {
       "artist": "Daire Lennon",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Drone",
+      "link": "https://dairelennon.com",
       "notes": ""
     },
     {
@@ -147,8 +155,8 @@
       "locationTags": [
         "Cork"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Folk",
+      "link": "https://roslynsteer.bandcamp.com/music",
       "notes": ""
     },
     {
@@ -160,7 +168,7 @@
       "locationTags": [
         "Limerick"
       ],
-      "genre": "",
+      "genre": "Minimal, leftfield",
       "link": "",
       "notes": ""
     },
@@ -173,48 +181,45 @@
       "locationTags": [
         "Limerick"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Improvisation, Noise",
+      "link": "https://peist.bandcamp.com/",
       "notes": "Collective/Band"
     },
     {
       "artist": "Declan Synnott",
-      "locationRaw": "Dublin",
+      "locationRaw": "Cork",
       "locations": [
-        "Dublin"
+        "Cork"
       ],
       "locationTags": [
-        "Dublin"
+        "Cork"
       ],
-      "genre": "",
-      "link": "",
-      "notes": ""
-    },
-    {
-      "artist": "Aidan Reilly",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "genre": "Noise",
+      "link": "https://declansynnott.bandcamp.com/",
       "notes": ""
     },
     {
       "artist": "Tony Higgins",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Galway",
+      "locations": [
+        "Galway"
+      ],
+      "locationTags": [
+        "Galway"
+      ],
+      "genre": "Ambient",
+      "link": "https://junior85.bandcamp.com/music",
       "notes": ""
     },
     {
       "artist": "Agu",
-      "locationRaw": "",
+      "locationRaw": "Czech Republic",
       "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationTags": [
+        "Czech Republic"
+      ],
+      "genre": "Folk, Vocal, World Music",
+      "link": "https://agumusic.bandcamp.com/album/ke-sv-tlu",
       "notes": ""
     },
     {
@@ -226,22 +231,21 @@
       "locationTags": [
         "Limerick"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Ambiente, Irish",
+      "link": "https://furangka.bandcamp.com/music",
       "notes": ""
     },
     {
       "artist": "Phil Maguire",
-      "locationRaw": "Scotland/Cork",
+      "locationRaw": "Cork",
       "locations": [
         "Cork"
       ],
       "locationTags": [
-        "Scotland",
         "Cork"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Drone, Noise, Minimalism",
+      "link": "https://philmaguire.com/",
       "notes": "Solo"
     },
     {
@@ -251,35 +255,49 @@
       "locationTags": [
         "Zurich"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Drone, Noise, Minimalism",
+      "link": "https://jasonkahn.net/",
       "notes": "Solo"
     },
     {
       "artist": "Patrick Corcoran",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Limerick",
+      "locations": [
+        "Limerick"
+      ],
+      "locationTags": [
+        "Limerick"
+      ],
+      "genre": "Dark ambient, Drone",
+      "link": "https://patrickcorcoran.bandcamp.com/",
       "notes": ""
     },
     {
       "artist": "Tony Monahan",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Limerick",
+      "locations": [
+        "Limerick"
+      ],
+      "locationTags": [
+        "Limerick"
+      ],
+      "genre": "Ambient, Drone",
+      "link": "www.tonymonahan.com",
       "notes": ""
     },
     {
       "artist": "BB84",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin/Leitrim",
+      "locations": [
+        "Dublin",
+        "Leitrim"
+      ],
+      "locationTags": [
+        "Dublin",
+        "Leitrim"
+      ],
+      "genre": "Avant-garde, Noise",
+      "link": "https://bb84.bandcamp.com/album/ardnacrusha",
       "notes": "Collective/Band"
     },
     {
@@ -292,7 +310,7 @@
         "Limerick"
       ],
       "genre": "Noise Metal",
-      "link": "",
+      "link": "https://nilim.neocities.org/",
       "notes": ""
     },
     {
@@ -304,21 +322,22 @@
       "locationTags": [
         "Dublin"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Drone, Noise, Ambient",
+      "link": "https://blackcoral23.bandcamp.com/",
       "notes": ""
     },
     {
       "artist": "Miss Foreign Affairs",
-      "locationRaw": "Sligo",
+      "locationRaw": "Sligo/Barcelona",
       "locations": [
         "Sligo"
       ],
       "locationTags": [
-        "Sligo"
+        "Sligo",
+        "Barcelona"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Avant-rock, Drone",
+      "link": "https://owenkilfeather.bandcamp.com/music",
       "notes": ""
     },
     {
@@ -330,21 +349,25 @@
       "locationTags": [
         "Cork"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Noise Rock, No Wave",
+      "link": "https://www.instagram.com/therapy.horse.ire",
       "notes": ""
     },
     {
       "artist": "WOLFBAIT",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Drone, Noise, Rock",
+      "link": "https://wolfbaitcult.bandcamp.com/music",
       "notes": ""
     },
     {
-      "artist": "Kieran Kahoe",
+      "artist": "Kieran Kehoe",
       "locationRaw": "Kilkenny",
       "locations": [
         "Kilkenny"
@@ -352,8 +375,8 @@
       "locationTags": [
         "Kilkenny"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Ambient, Minimalism",
+      "link": "https://www.instagram.com/kehoe.ceol/",
       "notes": ""
     },
     {
@@ -365,12 +388,25 @@
       "locationTags": [
         "Sligo"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Ambient, Vocal",
+      "link": "https://arvq.bandcamp.com/track/n-os-l",
       "notes": ""
     },
     {
       "artist": "Sine Tiler",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Ambient, Downtempo",
+      "link": "https://sinetiler.bandcamp.com/",
+      "notes": ""
+    },
+    {
+      "artist": "Chris Ledwidge",
       "locationRaw": "Limerick",
       "locations": [
         "Limerick"
@@ -378,75 +414,86 @@
       "locationTags": [
         "Limerick"
       ],
-      "genre": "",
-      "link": "",
-      "notes": ""
-    },
-    {
-      "artist": "Chris Ledwidge",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "genre": "Ambient, Chamber",
+      "link": "https://chrisledwidgemusic.com/",
       "notes": ""
     },
     {
       "artist": "Lou McMahon",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Clare",
+      "locations": [
+        "Clare"
+      ],
+      "locationTags": [
+        "Clare"
+      ],
+      "genre": "Drone, Contemporary, Minimalism",
+      "link": "https://www.loumcmahon.ie/",
       "notes": ""
     },
     {
       "artist": "Mat Warren",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Leitrim",
+      "locations": [
+        "Leitrim"
+      ],
+      "locationTags": [
+        "Leitrim"
+      ],
+      "genre": "Dark Ambiente, Downtempo",
+      "link": "https://www.matwarren.com",
       "notes": ""
     },
     {
       "artist": "Jonathan Crean",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Mayo",
+      "locations": [
+        "Mayo"
+      ],
+      "locationTags": [
+        "Mayo"
+      ],
+      "genre": "Electroacoustic, field recording",
+      "link": "https://www.jonathancrean.com/",
       "notes": ""
     },
     {
       "artist": "White Sage",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Psychedelic, Jazz",
+      "link": "https://whitesage.bandcamp.com/music",
       "notes": ""
     },
     {
       "artist": "Marc Aubele",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Ambient, Microtonal",
+      "link": "https://marcaubele.bandcamp.com/music",
       "notes": ""
     },
     {
       "artist": "barrelling+",
-      "locationRaw": "Cork",
+      "locationRaw": "Dublin",
       "locations": [
-        "Cork"
+        "Dublin"
       ],
       "locationTags": [
-        "Cork"
+        "Dublin"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Ambient, Glitch, Noise",
+      "link": "https://barrelling.bandcamp.com/",
       "notes": ""
     },
     {
@@ -454,35 +501,47 @@
       "locationRaw": "",
       "locations": [],
       "locationTags": [],
-      "genre": "",
-      "link": "",
+      "genre": "Ambient, Drone",
+      "link": "https://aidanthomastobin.com/",
       "notes": ""
     },
     {
       "artist": "French Radio Constellation",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Rock, Punk",
+      "link": "https://frenchradioconstellation.bandcamp.com/",
       "notes": ""
     },
     {
       "artist": "Russell's Bogle",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Drone, Noise, Lo-fi",
+      "link": "https://russellsbogle.bandcamp.com/music",
       "notes": ""
     },
     {
       "artist": "SexyTadhg",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Jazz, Irish, Folk",
+      "link": "https://sexytadhg.bandcamp.com/album/sluttrad",
       "notes": ""
     },
     {
@@ -496,29 +555,41 @@
     },
     {
       "artist": "K.C.N.",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Noise",
+      "link": "https://kcnmusic1.bandcamp.com/music",
       "notes": ""
     },
     {
       "artist": "Katie Gerardine O'Neill",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Ambient, Field recording, Noise",
+      "link": "https://www.katie-oneill.com/",
       "notes": ""
     },
     {
       "artist": "alfa00",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Clare",
+      "locations": [
+        "Clare"
+      ],
+      "locationTags": [
+        "Clare"
+      ],
+      "genre": "Ambient, Field recording, Noise",
+      "link": "https://alfa00.bandcamp.com/audio",
       "notes": ""
     },
     {
@@ -526,17 +597,21 @@
       "locationRaw": "",
       "locations": [],
       "locationTags": [],
-      "genre": "",
-      "link": "",
+      "genre": "Folk, Irish",
+      "link": "https://caitin.bandcamp.com/music",
       "notes": ""
     },
     {
       "artist": "KNRG",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Ambient, Vaporwave",
+      "link": "https://mk1recordings.bandcamp.com/",
       "notes": ""
     },
     {
@@ -544,8 +619,8 @@
       "locationRaw": "",
       "locations": [],
       "locationTags": [],
-      "genre": "",
-      "link": "",
+      "genre": "Ambient, Downtempo",
+      "link": "https://assemblylinemusic.bandcamp.com/music",
       "notes": ""
     },
     {
@@ -557,53 +632,71 @@
       "locationTags": [
         "Belfast"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Ambient, Chillwave",
+      "link": "https://conchr.bandcamp.com/music",
       "notes": ""
     },
     {
       "artist": "29's Fell Shadow",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Belfast",
+      "locations": [
+        "Belfast"
+      ],
+      "locationTags": [
+        "Belfast"
+      ],
+      "genre": "Drone, Americana",
+      "link": "https://www.subvert.fm/29fs",
       "notes": ""
     },
     {
       "artist": "Strand Unit",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Ambient, Folk",
+      "link": "https://strandunit.bandcamp.com/music",
       "notes": ""
     },
     {
       "artist": "lifewing",
-      "locationRaw": "",
+      "locationRaw": "Bristol",
       "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationTags": [
+        "Bristol"
+      ],
+      "genre": "Ambient",
+      "link": "https://lifewing.bandcamp.com/music",
       "notes": ""
     },
     {
       "artist": "Colin James Woods",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Belfast",
+      "locations": [
+        "Belfast"
+      ],
+      "locationTags": [
+        "Belfast"
+      ],
+      "genre": "Ambient, Noise, Drone",
+      "link": "https://colinjameswoods.com/",
       "notes": ""
     },
     {
       "artist": "Mick Chillage",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Ambient, IDM",
+      "link": "https://mickchillage.bandcamp.com/",
       "notes": ""
     },
     {
@@ -611,8 +704,8 @@
       "locationRaw": "",
       "locations": [],
       "locationTags": [],
-      "genre": "",
-      "link": "",
+      "genre": "Ambient, Jazz",
+      "link": "https://www.subvert.fm/maverick",
       "notes": ""
     },
     {
@@ -624,17 +717,21 @@
       "locationTags": [
         "Galway"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Ambient, Drone, Minimalism",
+      "link": "https://oceanfloor.bandcamp.com/music",
       "notes": ""
     },
     {
       "artist": "Dubdelay",
-      "locationRaw": "",
-      "locations": [],
-      "locationTags": [],
-      "genre": "",
-      "link": "",
+      "locationRaw": "Dublin",
+      "locations": [
+        "Dublin"
+      ],
+      "locationTags": [
+        "Dublin"
+      ],
+      "genre": "Ambient, Techno",
+      "link": "https://dubdelay1.bandcamp.com/music",
       "notes": ""
     },
     {
@@ -646,8 +743,8 @@
       "locationTags": [
         "Limerick"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Noise",
+      "link": "https://roisinberg.art/",
       "notes": ""
     },
     {
@@ -659,8 +756,8 @@
       "locationTags": [
         "Limerick"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Electroacoustic, Glitch",
+      "link": "https://www.youtube.com/watch?v=PFQxurQFcAE",
       "notes": ""
     },
     {
@@ -672,8 +769,21 @@
       "locationTags": [
         "Dundalk"
       ],
-      "genre": "",
-      "link": "",
+      "genre": "Ambient, Noise, Drone, Industrial",
+      "link": "https://sonicwomb1.bandcamp.com",
+      "notes": ""
+    },
+    {
+      "artist": "Jonathan Deasy",
+      "locationRaw": "Cork",
+      "locations": [
+        "Cork"
+      ],
+      "locationTags": [
+        "Cork"
+      ],
+      "genre": "Electroacoustic, Minimalism, Drone",
+      "link": "https://quietclapping.bandcamp.com",
       "notes": ""
     }
   ]

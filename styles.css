@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
 :root{--bg:#000000;--ink:#fd96fd;--pink:#FE84FD;--lime:#422142;--panel:rgba(0, 0, 0, 0.96);--line:#422142;--muted:rgba(246,241,235,.64)}
-*{box-sizing:border-box}html,body,#map,.app{width:100%;height:100%;margin:0}body{overflow:hidden;background:var(--bg);color:var(--ink);font-family:"Inconsolata","Courier New",monospace}
+*{box-sizing:border-box}html,body,#map,.app{width:100%;height:100%;margin:0}body{overflow:hidden;background:var(--bg);color:var(--ink);font-family:"Inconsolata",monospace}
 #map{background:#000000}
 
 .leaflet-image-layer{image-rendering:auto}
 .brand{position:absolute;z-index:600;top:28px;left:30px;pointer-events:none;text-shadow:0 3px 20px #000}
-.eyebrow,.panel-kicker{font-size:11px;letter-spacing:.16em;font-weight:700;color:var(--pink)}h1,h2{font-family:"Inconsolata","Courier New",monospace;margin:5px 0 8px;letter-spacing:-.05em}h1{font-size:clamp(36px,5vw,62px);line-height:.95}
+.eyebrow,.panel-kicker{font-size:11px;letter-spacing:.16em;font-weight:700;color:var(--pink)}h1,h2{font-family:"Inconsolata",monospace;margin:5px 0 8px;letter-spacing:-.05em}h1{font-size:clamp(36px,5vw,62px);line-height:.95}
 .brand p{margin:0;color:var(--muted)}
 .controls{position:absolute;z-index:700;top:28px;right:28px;display:flex;gap:8px}
 .controls button,.unmapped{border:1px solid var(--line);background:rgba(10,10,10,.82);color:var(--ink);border-radius:999px;padding:10px 14px;cursor:pointer;font:600 12px "Inconsolata",monospace}
@@ -67,34 +67,46 @@
 .crosshair::after{width:1px;height:30px;left:14px;top:0}
 .crosshair span{position:absolute;width:7px;height:7px;left:11px;top:11px;border:1px solid var(--lime);border-radius:50%}
 
-
-
 /* ======================================================
-   COMPACT SOUNDCLOUD RADIO PLAYER
+   SIMPLE RADIO PLAYER
    ====================================================== */
 
 .radio-player {
   position: fixed;
+
   left: 0;
   right: 0;
   bottom: 0;
+
   z-index: 2000;
 
-  min-height: 64px;
+  min-height: 72px;
 
   display: grid;
-  grid-template-columns: minmax(170px, 1fr) auto auto minmax(280px, 2fr) 105px;
+
+  grid-template-columns:
+    minmax(180px, 1fr)
+    auto
+    auto
+    auto
+    minmax(280px, 2fr);
+
   align-items: center;
-  gap: 10px;
 
-  padding: 7px 14px;
+  gap: 12px;
 
-  background: rgba(8, 8, 8, .94);
-  border-top: 1px solid rgba(254,132,253,.22);
+  padding: 10px 18px;
+
+  background: rgba(8, 8, 8, 0.562);
+
+  border-top:
+    1px solid rgba(255,255,255,.12);
+
   backdrop-filter: blur(16px);
-
-  font-family: "Inconsolata", "Courier New", monospace;
 }
+
+
+/* Episode title */
 
 .radio-info {
   min-width: 0;
@@ -102,95 +114,259 @@
 
 .radio-label {
   font-size: 9px;
+
   letter-spacing: .14em;
-  color: var(--pink);
+
+  color: var(--lime);
+
   margin-bottom: 3px;
 }
 
 #currentEpisode {
-  font-size: 12px;
+  font-size: 13px;
+
   font-weight: 600;
+
   white-space: nowrap;
+
   overflow: hidden;
+
   text-overflow: ellipsis;
 }
 
+
+/* Buttons */
+
 .player-button {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.2);
+
+  border:
+    1px solid rgba(255,255,255,.2);
+
   background: transparent;
+
   color: var(--ink);
+
   cursor: pointer;
 
-  font: 20px "Inconsolata", "Courier New", monospace;
+  font-size: 15px;
+
+  transition:
+    background .15s ease,
+    border-color .15s ease;
 }
 
 .player-button:hover {
-  border-color: var(--pink);
-  color: var(--pink);
+  border-color: var(--lime);
+
+  background:
+    rgba(216, 88, 255, 0.08);
 }
 
-.soundcloud-wrap {
-  min-width: 0;
-  height: 46px;
-  overflow: hidden;
-  border-radius: 7px;
+.play-button {
+  border-color: var(--lime);
+
+  color: var(--lime);
 }
 
-#soundcloudPlayer {
-  display: block;
+
+/* Progress */
+
+.player-progress {
+  display: grid;
+
+  grid-template-columns:
+    38px 1fr 42px;
+
+  align-items: center;
+
+  gap: 8px;
+
+  font-size: 10px;
+
+  color: var(--muted);
+}
+
+#progressBar {
   width: 100%;
-  height: 46px;
+
+  height: 3px;
+
+  appearance: none;
+
+  background: rgba(255,255,255,.2);
+
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+#progressBar::-webkit-slider-thumb {
+  appearance: none;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: var(--lime);
+
+  cursor: pointer;
+}
+
+#progressBar::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+
   border: 0;
+
+  border-radius: 50%;
+
+  background: var(--lime);
+
+  cursor: pointer;
 }
 
-#episodePicker {
-  width: 100%;
-  min-width: 0;
 
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 999px;
+/* Hide native audio element */
 
-  background: #111;
-  color: var(--ink);
-
-  padding: 7px 9px;
-
-  font: 11px "Inconsolata", "Courier New", monospace;
+#audioPlayer {
+  display: none;
 }
 
-@media (max-width: 800px) {
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
   .radio-player {
-    grid-template-columns: 1fr auto auto;
-    gap: 7px;
-    padding: 7px 10px;
+
+    grid-template-columns:
+      1fr auto auto auto;
+
+    padding:
+      9px 12px;
+
   }
 
   .radio-info {
-    min-width: 0;
+
+    grid-column: 1 / -1;
+  }
+
+  .player-progress {
+
+    grid-column: 1 / -1;
+
+    grid-row: 2;
+
+  }
+
+}
+
+
+/* v9: city-name toggle */
+#cityNamesToggle.active::after {
+  content: " ON";
+}
+#cityNamesToggle:not(.active)::after {
+  content: " OFF";
+}
+
+/* v9: mobile map optimisation */
+@media (max-width: 700px) {
+  #map {
+    height: min(68vh, 620px) !important;
+    min-height: 360px !important;
+  }
+
+  .map-wrap, .map-container {
+    min-height: 0;
+  }
+
+  .leaflet-container {
+    font-size: 13px;
+  }
+
+  .leaflet-control-zoom a {
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+  }
+
+  .city-label {
+    font-size: 11px !important;
+    padding: 2px 5px !important;
+  }
+
+  .artist-label {
+    font-size: 10px !important;
+  }
+
+  .radio-player {
+    min-height: 52px;
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .radio-info {
+    max-width: 105px;
+    min-width: 70px;
+  }
+
+  .radio-label {
+    font-size: 9px;
+  }
+
+  #currentEpisode {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .player-button {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
   }
 
   .soundcloud-wrap {
-    grid-column: 1 / -1;
-    grid-row: 2;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .soundcloud-wrap iframe {
+    width: 100%;
+    height: 48px;
+    display: block;
   }
 
   #episodePicker {
-    grid-column: 1 / -1;
-    grid-row: 3;
+    max-width: 82px;
+    font-size: 10px;
   }
 }
 
-/* Make native form controls consistently console-like. */
-button,
-input,
-select,
-textarea {
-  font-family: "Inconsolata", "Courier New", monospace;
+@media (max-width: 420px) {
+  #map {
+    height: 60vh !important;
+    min-height: 330px !important;
+  }
+
+  .radio-info {
+    display: none;
+  }
+
+  #episodePicker {
+    max-width: 70px;
+  }
 }

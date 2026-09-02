@@ -415,92 +415,313 @@ Promise.all([
   openPanel();
 });
 
-
 // ======================================================
-// SOUNDCLOUD RADIO PLAYER
+// RADIO EPISODE PLAYER
 // ======================================================
 
-const soundcloudPlayer = document.getElementById("soundcloudPlayer");
-const currentEpisodeElement = document.getElementById("currentEpisode");
-const episodePicker = document.getElementById("episodePicker");
-const prevEpisodeButton = document.getElementById("prevEpisode");
-const nextEpisodeButton = document.getElementById("nextEpisode");
+const radioPlayer = document.getElementById("radioPlayer");
+const audioPlayer = document.getElementById("audioPlayer");
+
+const currentEpisode =
+  document.getElementById("currentEpisode");
+
+const prevEpisode =
+  document.getElementById("prevEpisode");
+
+const playPause =
+  document.getElementById("playPause");
+
+const nextEpisode =
+  document.getElementById("nextEpisode");
+
+const progressBar =
+  document.getElementById("progressBar");
+
+const currentTime =
+  document.getElementById("currentTime");
+
+const remainingTime =
+  document.getElementById("remainingTime");
 
 let episodes = [];
 let currentEpisodeIndex = 0;
 
+
+// ------------------------------------------------------
+// LOAD EPISODES
+// ------------------------------------------------------
+
 fetch("episodes.json")
   .then(response => {
+
     if (!response.ok) {
-      throw new Error(`Could not load episodes.json (${response.status})`);
+      throw new Error("Could not load episodes.json");
     }
+
     return response.json();
+
   })
   .then(data => {
-    episodes = Array.isArray(data) ? data : [];
 
-    episodePicker.innerHTML = `<option value="">Episodes</option>`;
-
-    episodes.forEach((episode, index) => {
-      const option = document.createElement("option");
-      option.value = index;
-      option.textContent = episode.title || `Episode ${index + 1}`;
-      episodePicker.appendChild(option);
-    });
+    episodes = data;
 
     if (episodes.length) {
-      loadSoundCloudEpisode(0);
+      loadEpisode(0, false);
     }
+
   })
   .catch(error => {
+
     console.error(error);
-    currentEpisodeElement.textContent = "No episodes available";
+
+    currentEpisode.textContent =
+      "No episodes available";
+
   });
 
-function soundCloudEmbedUrl(url) {
-  return "https://w.soundcloud.com/player/?" +
-    new URLSearchParams({
-      url: url,
-      color: "#fe84fd",
-      auto_play: "false",
-      hide_related: "true",
-      show_comments: "false",
-      show_user: "false",
-      show_reposts: "false",
-      show_teaser: "false",
-      visual: "false"
-    }).toString();
-}
 
-function loadSoundCloudEpisode(index) {
-  if (!episodes.length) return;
+// ------------------------------------------------------
+// LOAD EPISODE
+// ------------------------------------------------------
 
-  if (index < 0) index = episodes.length - 1;
-  if (index >= episodes.length) index = 0;
+function loadEpisode(index, autoplay = false) {
+
+  if (!episodes.length) {
+    return;
+  }
+
+  // Wrap around.
+  if (index < 0) {
+    index = episodes.length - 1;
+  }
+
+  if (index >= episodes.length) {
+    index = 0;
+  }
 
   currentEpisodeIndex = index;
 
   const episode = episodes[index];
 
-  currentEpisodeElement.textContent =
+  audioPlayer.src = episode.file;
+
+  currentEpisode.textContent =
     episode.title || `Episode ${index + 1}`;
 
-  episodePicker.value = String(index);
+  progressBar.value = 0;
 
-  soundcloudPlayer.src = episode.soundcloud
-    ? soundCloudEmbedUrl(episode.soundcloud)
-    : "";
+  currentTime.textContent = "0:00";
+
+  remainingTime.textContent = "-0:00";
+
+  if (autoplay) {
+
+    audioPlayer
+      .play()
+      .catch(() => {});
+
+  }
+
+  updatePlayButton();
+
 }
 
-prevEpisodeButton.onclick = () => {
-  loadSoundCloudEpisode(currentEpisodeIndex - 1);
+
+// ------------------------------------------------------
+// PLAY / PAUSE
+// ------------------------------------------------------
+
+playPause.onclick = () => {
+
+  if (!audioPlayer.src) {
+    return;
+  }
+
+  if (audioPlayer.paused) {
+
+    audioPlayer
+      .play()
+      .catch(() => {});
+
+  } else {
+
+    audioPlayer.pause();
+
+  }
+
 };
 
-nextEpisodeButton.onclick = () => {
-  loadSoundCloudEpisode(currentEpisodeIndex + 1);
+
+audioPlayer.addEventListener(
+  "play",
+  updatePlayButton
+);
+
+audioPlayer.addEventListener(
+  "pause",
+  updatePlayButton
+);
+
+
+function updatePlayButton() {
+
+  playPause.textContent =
+    audioPlayer.paused
+      ? "▶"
+      : "❚❚";
+
+}
+
+
+// ------------------------------------------------------
+// PREVIOUS
+// ------------------------------------------------------
+
+prevEpisode.onclick = () => {
+
+  loadEpisode(
+    currentEpisodeIndex - 1,
+    true
+  );
+
 };
 
-episodePicker.onchange = event => {
-  if (event.target.value === "") return;
-  loadSoundCloudEpisode(Number(event.target.value));
+
+// ------------------------------------------------------
+// NEXT
+// ------------------------------------------------------
+
+nextEpisode.onclick = () => {
+
+  loadEpisode(
+    currentEpisodeIndex + 1,
+    true
+  );
+
 };
+
+
+// ------------------------------------------------------
+// AUTOMATIC NEXT EPISODE
+// ------------------------------------------------------
+
+audioPlayer.addEventListener(
+  "ended",
+  () => {
+
+    loadEpisode(
+      currentEpisodeIndex + 1,
+      true
+    );
+
+  }
+);
+
+
+// ------------------------------------------------------
+// PROGRESS
+// ------------------------------------------------------
+
+audioPlayer.addEventListener(
+  "loadedmetadata",
+  () => {
+
+    if (!Number.isFinite(audioPlayer.duration)) {
+      return;
+    }
+
+    progressBar.max =
+      audioPlayer.duration;
+
+    updateProgress();
+
+  }
+);
+
+
+audioPlayer.addEventListener(
+  "timeupdate",
+  updateProgress
+);
+
+
+function updateProgress() {
+
+  if (!Number.isFinite(audioPlayer.duration)) {
+    return;
+  }
+
+  progressBar.value =
+    audioPlayer.currentTime;
+
+  currentTime.textContent =
+    formatTime(audioPlayer.currentTime);
+
+  remainingTime.textContent =
+    "-" +
+    formatTime(
+      Math.max(
+        0,
+        audioPlayer.duration -
+        audioPlayer.currentTime
+      )
+    );
+
+}
+
+
+progressBar.addEventListener(
+  "input",
+  () => {
+
+    audioPlayer.currentTime =
+      Number(progressBar.value);
+
+  }
+);
+
+
+// ------------------------------------------------------
+// TIME FORMAT
+// ------------------------------------------------------
+
+function formatTime(seconds) {
+
+  if (!Number.isFinite(seconds)) {
+    return "0:00";
+  }
+
+  seconds = Math.max(
+    0,
+    Math.floor(seconds)
+  );
+
+  const minutes =
+    Math.floor(seconds / 60);
+
+  const remainingSeconds =
+    seconds % 60;
+
+  return (
+    minutes +
+    ":" +
+    String(remainingSeconds).padStart(2, "0")
+  );
+
+}
+
+
+const cityNamesToggle = document.getElementById("cityNamesToggle");
+let showCityNames = true;
+function updateCityNamesVisibility() {
+  document.querySelectorAll(".city-label").forEach((el) => {
+    el.style.display = showCityNames ? "" : "none";
+  });
+}
+if (cityNamesToggle) {
+  cityNamesToggle.addEventListener("click", () => {
+    showCityNames = !showCityNames;
+    updateCityNamesVisibility();
+    cityNamesToggle.classList.toggle("active", showCityNames);
+  });
+}

@@ -11,12 +11,7 @@
 <div class="search-wrap"><input id="search" type="search" placeholder="Search artist or city…" aria-label="Search artist or city"><div id="searchResults" class="search-results"></div></div>
 <aside id="infoPanel" class="info-panel"><button id="closePanel" class="close" aria-label="Close">×</button><div id="panelKicker" class="panel-kicker">SELECT A PLACE</div><h2 id="panelTitle">Explore Ireland</h2><p id="panelDescription">Click a city or an artist node.</p><div id="artistList" class="artist-list"></div></aside>
 <button id="unmappedBtn" class="unmapped">Other artists <span id="unmappedCount"></span></button>
-<div id="radioPlayer" class="radio-player">
 
-  <div class="radio-info">
-    <div class="radio-label">NOW PLAYING</div>
-    <div id="currentEpisode">Select an episode</div>
-  </div>
 
   <button id="prevEpisode" class="player-button" aria-label="Previous episode">
     ‹
@@ -51,5 +46,31 @@
     preload="metadata"
   ></audio>
 
+</div>
+<div id="radioPlayer" class="radio-player">
+  <div class="radio-info">
+    <div class="radio-label">RADIO SHOW</div>
+    <div id="currentEpisode">Select an episode</div>
+  </div>
+
+  <button id="prevEpisode" class="player-button" type="button" aria-label="Previous episode">‹</button>
+
+  <button id="nextEpisode" class="player-button" type="button" aria-label="Next episode">›</button>
+
+  <div class="soundcloud-wrap">
+    <iframe
+      id="soundcloudPlayer"
+      title="SoundCloud episode player"
+      allow="autoplay"
+      loading="lazy"
+      scrolling="no"
+      frameborder="no"
+      src="">
+    </iframe>
+  </div>
+
+  <select id="episodePicker" aria-label="Select episode">
+    <option value="">Episodes</option>
+  </select>
 </div>
 </main><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="app.js"></script></body></html>

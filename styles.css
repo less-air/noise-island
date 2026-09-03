@@ -36,8 +36,7 @@ body{
 }
 
 .leaflet-image-layer{
-  image-rendering:auto;
-  top:100px
+  image-rendering:auto
 }
 
 .brand{

@@ -469,7 +469,6 @@ function soundCloudEmbedUrl(url) {
       show_user: "false",
       show_reposts: "false",
       show_teaser: "false",
-      show_artwork: "false",
       visual: "false"
     }).toString();
 }

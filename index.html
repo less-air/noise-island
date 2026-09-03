@@ -1,45 +1,43 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Noise Island — Ireland's Experimental Music Map</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="styles.css">
-</head><body><main class="app">
-<div id="map"></div>
-<header class="brand"><div class="eyebrow">EXPERIEMTNAL IRISH MUSIC MAP</div><h1>Noise Island</h1><p>Powered by Pink_Noise_061 and the Limerick Noise Collective.</p></header>
-<div class="controls"><button id="resetMap">Reset view</button><button id="toggleLabels" class="active">Artist names</button><button id="cityNamesToggle" class="active">City names</button></div>
-<div class="search-wrap"><input id="search" type="search" placeholder="Search artist or city…" aria-label="Search artist or city"><div id="searchResults" class="search-results"></div></div>
-<aside id="infoPanel" class="info-panel"><button id="closePanel" class="close" aria-label="Close">×</button><div id="panelKicker" class="panel-kicker">SELECT A PLACE</div><h2 id="panelTitle">Explore Ireland</h2><p id="panelDescription">Click a city or an artist node.</p><div id="artistList" class="artist-list"></div></aside>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Noise Island — Ireland's Experimental Music Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main class="app">
+    <div id="map"></div>
+    <header class="brand">
+      <div class="eyebrow">EXPERIEMTNAL IRISH MUSIC MAP</div>
+      <h1>Noise Island</h1>
+      <p>Powered by Pink_Noise_061 and the Limerick Noise Collective.</p>
+    </header>
+
+    <div class="controls">
+      <button id="resetMap">Reset view</button>
+      <button id="toggleLabels" class="active">Artist names</button>
+      <button id="cityNamesToggle" class="active">City names</button>
+    </div>
+
+    <div class="search-wrap">
+      <input id="search" type="search" placeholder="Search artist or city…" aria-label="Search artist or city">
+      <div id="searchResults" class="search-results">
+      </div>
+    </div>
+
+    <aside id="infoPanel" class="info-panel">
+      <button id="closePanel" class="close" aria-label="Close">×</button>
+      <div id="panelKicker" class="panel-kicker">SELECT A PLACE</div>
+      <h2 id="panelTitle">Explore Ireland</h2>
+      <p id="panelDescription">Click a city or an artist node.</p>
+      <div id="artistList" class="artist-list"></div>
+    </aside>
+
 <button id="unmappedBtn" class="unmapped">Other artists <span id="unmappedCount"></span></button>
-
-
-  <button id="prevEpisode" class="player-button" aria-label="Previous episode">
-    ‹‹
-  </button>
-
-  <button id="playPause" class="player-button play-button" aria-label="Play">
-    ▶
-  </button>
-
-  <button id="nextEpisode" class="player-button" aria-label="Next episode">
-    ››
-  </button>
-
-  <div class="player-progress">
-
-    <span id="currentTime">0:00</span>
-
-    <input
-      id="progressBar"
-      type="range"
-      min="0"
-      max="100"
-      value="0"
-    >
-
-    <span id="remainingTime">-0:00</span>
-
-  </div>
 
   <audio
     id="audioPlayer"
@@ -47,15 +45,16 @@
   ></audio>
 
 </div>
+
 <div id="radioPlayer" class="radio-player">
   <div class="radio-info">
     <div class="radio-label">Now Playing</div>
     <div id="currentEpisode">Select an episode</div>
   </div>
 
-  <button id="prevEpisode" class="player-button" type="button" aria-label="Previous episode">‹‹</button>
+  <button id="prevEpisode" class="player-button" type="button" aria-label="Previous episode">‹</button>
 
-  <button id="nextEpisode" class="player-button" type="button" aria-label="Next episode">››</button>
+  <button id="nextEpisode" class="player-button" type="button" aria-label="Next episode">›</button>
 
   <div class="soundcloud-wrap">
     <iframe
@@ -73,4 +72,8 @@
     <option value="">Episodes</option>
   </select>
 </div>
-</main><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="app.js"></script></body></html>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

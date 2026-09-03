@@ -1,77 +1,525 @@
+/* Fonts and Colors */
+
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
-:root{--bg:#000000;--ink:#fd96fd;--pink:#FE84FD;--lime:#422142;--panel:rgba(0, 0, 0, 0.96);--line:#422142;--muted:rgba(246,241,235,.64)}
-*{box-sizing:border-box}html,body,#map,.app{width:100%;height:100%;margin:0}body{overflow:hidden;background:var(--bg);color:var(--ink);font-family:"Inconsolata","Courier New",monospace}
-#map{background:#000000}
 
-.leaflet-image-layer{image-rendering:auto}
-.brand{position:absolute;z-index:600;top:28px;left:30px;pointer-events:none;text-shadow:0 3px 20px #000}
-.eyebrow,.panel-kicker{font-size:11px;letter-spacing:.16em;font-weight:700;color:var(--pink)}h1,h2{font-family:"Inconsolata","Courier New",monospace;margin:5px 0 8px;letter-spacing:-.05em}h1{font-size:clamp(36px,5vw,62px);line-height:.95}
-.brand p{margin:0;color:var(--muted)}
-.controls{position:absolute;z-index:700;top:28px;right:28px;display:flex;gap:8px}
-.controls button,.unmapped{border:1px solid var(--line);background:rgba(10,10,10,.82);color:var(--ink);border-radius:999px;padding:10px 14px;cursor:pointer;font:600 12px "Inconsolata",monospace}
-.controls button.active{border-color:var(--pink);color:var(--pink)}
-.search-wrap{position:absolute;z-index:500;left:30px;bottom:28px;width:min(320px,calc(100vw - 60px))}
-.search-wrap input{width:100%;padding:12px 15px;border:1px solid var(--line);border-radius:999px;background:rgba(10,10,10,.88);color:var(--ink);outline:none;font:500 13px "Inconsolata",monospace}
-.search-results{display:none;margin-top:7px;background:rgba(12,12,12,.97);border:1px solid var(--line);border-radius:14px;overflow:hidden;max-height:260px;overflow-y:auto}
-.search-results.open{display:block}
-.result{padding:11px 14px;border-bottom:1px solid var(--line);cursor:pointer}
-.result:last-child{border-bottom:0}
-.result:hover{background:rgba(255,255,255,.06)}
-.result strong{display:block;font-size:13px}
-.result span{font-size:11px;color:var(--muted)}
-.info-panel{position:absolute;z-index:800;top:28px;right:28px;width:min(430px,calc(100vw - 40px));max-height:calc(100vh - 56px);overflow:auto;padding:28px;background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 25px 70px rgba(0,0,0,.45);transform:translateX(calc(100% + 40px));transition:transform .25s ease}
-.info-panel.open{transform:translateX(0)}
-.close{position:absolute;right:14px;top:12px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:24px;cursor:pointer}#panelTitle{font-size:34px}
-.info-panel p{color:var(--muted);line-height:1.5}
-.artist-list{display:grid;gap:10px;margin-top:20px}
-.artist-card{padding:15px;border:1px solid var(--line);border-radius:13px;background:#3b223b}
-.artist-name{font-size:18px;font-weight:700}
-.hashtags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.tag{font-size:11px;font-weight:600;color:var(--pink);border:1px solid rgba(224,106,219,.35);border-radius:999px;padding:4px 7px}
-.artist-note{margin-top:10px;font-size:12px;color:var(--muted);line-height:1.45}
-.artist-link{display:inline-block;margin-top:13px;padding:9px 12px;border-radius:999px;background:var(--pink);color:#1a1019;text-decoration:none;font-size:12px;font-weight:700}
-.no-link{margin-top:12px;font-size:11px;color:rgba(255, 255, 255, 0.4)}
-.unmapped{position:absolute;z-index:500;right:28px;bottom:28px}
-.unmapped span{display:inline-grid;place-items:center;margin-left:7px;min-width:22px;height:22px;border-radius:99px;background:var(--lime);color:#170d17}
-.city-marker,.artist-node{transform:translate(-50%,-50%);cursor:pointer}
-.city-core{width:10px;height:10px;border-radius:50%;background:var(--lime);border:3px solid #000000;box-shadow:0 0 0 6px #422142}
-.city-label{position:absolute;left:16px;top:-5px;padding:4px 6px;border-radius:4px;background:#fe84fe;border:0px solid rgba(5, 5, 5, 0);color:var(--lime);font-size:20px;white-space:nowrap;pointer-events:none}
-.artist-node{transition:transform .16s ease}
-.artist-node:hover{transform:translate(-50%,-50%) scale(1.16)}
-.artist-node-dot{width:5px;height:5px;border-radius:50%;background:var(--lime);border:2px solid #000000;box-shadow:0 0 0 5px #241324}
-.artist-node-label{position:absolute;left:16px;top:-5px;padding:4px 6px;border-radius:4px;background:#fe84fe7c;border:0px solid rgba(5, 5, 5, 0);color:var(--lime);font-size:15px;white-space:nowrap;pointer-events:none}
-.artist-node-label.hidden{display:none}
-.node-line{pointer-events:none}
-@media(max-width:700px){.brand{top:18px;left:18px}.controls{top:18px;right:18px}
-.search-wrap{left:18px;bottom:18px;width:calc(100vw - 36px)}
-.info-panel{top:auto;right:10px;bottom:10px;width:calc(100vw - 20px);max-height:60vh;transform:translateY(calc(100% + 20px))}
-.info-panel.open{transform:translateY(0)}
-.unmapped{right:18px;bottom:70px}}
+:root{
+  --bg:#000000;
+  --ink:#fd96fd;
+  --pink:#FE84FD;
+  --lime:#422142;
+  --panel:#000000f5;
+  --line:#422142;
+  --muted:rgba(246,241,235,.64)
+}
 
-/* Developer positioning mode */
-#devPosition{position:absolute;z-index:1200;left:50%;top:18px;transform:translateX(-50%) translateY(-150%);transition:transform .2s ease;background:rgba(5,5,5,.97);border:1px solid var(--lime);border-radius:12px;padding:13px 15px;min-width:270px;box-shadow:0 12px 40px rgba(0,0,0,.5);font:11px "Inconsolata",monospace}
-#devPosition.visible{transform:translateX(-50%) translateY(0)}
-#devPosition strong{display:block;color:var(--lime);font-size:10px;letter-spacing:.12em;margin-bottom:7px}
-#devPosition .dev-help{color:var(--muted);margin-bottom:8px;line-height:1.4}
-#devCoords{color:var(--ink);font-weight:700;margin-bottom:3px}
-#devCity{color:var(--pink);margin-bottom:7px}
-#devJson{display:none;margin:8px 0;padding:8px;border-radius:7px;background:rgba(255,255,255,.05);color:var(--lime);font-size:10px;white-space:pre-wrap}
-#devPosition.has-position #devJson{display:block}
-.dev-buttons{display:flex;gap:7px}
-.dev-buttons button{border:1px solid rgba(222, 88, 255, 0.35);background:transparent;color:var(--lime);border-radius:999px;padding:6px 10px;cursor:pointer;font:600 10px "Inconsolata",monospace}
-.dev-buttons button:hover{background:rgba(222, 88, 255, 0.1)}
-.developer-crosshair{background:transparent!important;border:0!important}
-.crosshair{width:30px;height:30px;position:relative}
-.crosshair::before,.crosshair::after{content:"";position:absolute;background:var(--lime)}
-.crosshair::before{width:30px;height:1px;left:0;top:14px}
-.crosshair::after{width:1px;height:30px;left:14px;top:0}
-.crosshair span{position:absolute;width:7px;height:7px;left:11px;top:11px;border:1px solid var(--lime);border-radius:50%}
+/* General */
 
+*{
+  box-sizing:border-box
+}
 
+html,body,#map,.app{
+  width:100%;
+  height:100%;
+  margin:0
+}
 
-/* ======================================================
-   COMPACT SOUNDCLOUD RADIO PLAYER
-   ====================================================== */
+body{
+  overflow:hidden;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Inconsolata","Courier New",monospace
+}
+
+#map{
+  background:#000000
+}
+
+.leaflet-image-layer{
+  image-rendering:auto
+}
+
+.brand{
+  position:absolute;
+  z-index:600;
+  top:28px;
+  left:30px;
+  pointer-events:none;
+  text-shadow:0 3px 20px #000
+}
+
+.eyebrow,.panel-kicker{
+  font-size:11px;
+  letter-spacing:.16em;
+  font-weight:700;
+  color:var(--pink)
+}
+
+h1,h2{
+  font-family:"Inconsolata","Courier New",monospace;
+  margin:5px 0 8px;
+  letter-spacing:-.05em
+}
+
+h1{
+  font-size:clamp(36px,5vw,62px);
+  line-height:.95
+}
+
+.brand p{
+  margin:0;
+  color:var(--muted)
+}
+
+.controls{
+  position:absolute;
+  z-index:700;
+  top:28px;
+  right:28px;
+  display:flex;
+  gap:8px
+}
+
+.controls button,.unmapped{
+  border:1px solid var(--line);
+  background:rgba(10,10,10,.82);
+  color:var(--ink);
+  border-radius:999px;
+  padding:10px 14px;
+  cursor:pointer;
+  font:600 12px "Inconsolata",monospace
+}
+
+.controls button.active{
+  border-color:var(--pink);
+  color:var(--pink)
+}
+
+/* Search bar */
+
+.search-wrap{
+  position:absolute;
+  z-index:500;
+  left:30px;
+  bottom:150px;
+  width:min(320px,calc(100vw - 60px))
+}
+
+.search-wrap input{
+  width:100%;
+  padding:12px 15px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(10,10,10,.88);
+  color:var(--ink);
+  outline:none;
+  font:500 13px "Inconsolata",monospace
+}
+
+.search-results{
+  display:none;
+  margin-top:7px;
+  background:rgba(12,12,12,.97);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  max-height:260px;
+  overflow-y:auto
+}
+
+.search-results.open{
+  display:block
+}
+
+.result{
+  padding:11px 14px;
+  border-bottom:1px solid var(--line);
+  cursor:pointer
+}
+
+.result:last-child{
+  border-bottom:0
+}
+
+.result:hover{
+  background:rgba(255,255,255,.06)
+}
+
+.result strong{
+  display:block;
+  font-size:13px
+}
+
+.result span{
+  font-size:11px;
+  color:var(--muted)
+}
+
+/* Info Panel */
+
+.info-panel{
+  position:absolute;
+  z-index:800;
+  top:28px;
+  right:28px;
+  width:min(430px,calc(100vw - 40px));
+  max-height:calc(100vh - 56px);
+  overflow:auto;
+  padding:28px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 25px 70px rgba(0,0,0,.45);
+  transform:translateX(calc(100% + 40px));
+  transition:transform .25s ease
+}
+
+.info-panel.open{
+  transform:translateX(0)
+}
+
+.close{
+  position:absolute;
+  right:14px;
+  top:12px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--ink);
+  font-size:24px;
+  cursor:pointer
+}
+
+#panelTitle{
+  font-size:34px
+}
+
+.info-panel p{
+  color:var(--muted);
+  line-height:1.5
+}
+
+/* Artists List */
+
+.artist-list{
+  display:grid;
+  gap:10px;
+  margin-top:20px
+}
+
+.artist-card{
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#3b223b
+}
+
+.artist-name{
+  font-size:18px;
+  font-weight:700
+}
+
+.hashtags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:10px
+}
+
+.tag{
+  font-size:11px;
+  font-weight:600;
+  color:var(--pink);
+  border:1px solid rgba(224,106,219,.35);
+  border-radius:999px;
+  padding:4px 7px
+}
+
+.artist-note{
+  margin-top:10px;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.45
+}
+
+.artist-link{
+  display:inline-block;
+  margin-top:13px;
+  padding:9px 12px;
+  border-radius:999px;
+  background:var(--pink);
+  color:#1a1019;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:700
+}
+
+.no-link{
+  margin-top:12px;
+  font-size:11px;
+  color:rgba(255, 255, 255, 0.4)
+}
+
+/* Unmapped artists */
+
+.unmapped{
+  position:absolute;
+  z-index:500;
+  right:28px;
+  bottom:150px
+}
+
+.unmapped span{
+  display:inline-grid;
+  place-items:center;
+  margin-left:7px;
+  min-width:22px;
+  height:22px;
+  border-radius:99px;
+  background:var(--lime);
+  color:#170d17
+}
+
+/* City Nodes */
+
+.city-marker,.artist-node{
+  transform:translate(-50%,-50%);
+  cursor:pointer
+}
+
+.city-core{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--lime);
+  border:3px solid #000000;
+  box-shadow:0 0 0 6px #422142
+}
+
+.city-core:hover{
+  transform:translate(-50%,-50%) scale(1.16)
+}
+
+.city-label{
+  position:absolute;
+  left:16px;
+  top:-5px;
+  padding:4px 6px;
+  border-radius:4px;
+  background:#fe84fe;
+  border:0px solid rgba(5, 5, 5, 0);
+  color:var(--lime);
+  font:500 20px "Inconsolata",monospace;
+  white-space:nowrap;
+  pointer-events:none
+}
+
+.city-label.hidden{
+  display:none
+}
+
+/* Artists Nodes */
+
+.artist-node{
+  transition:transform .16s ease
+}
+
+.artist-node:hover{
+  transform:translate(-50%,-50%) scale(1.16)
+}
+
+.artist-node-dot{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--lime);
+  border:2px solid #000000;
+  box-shadow:0 0 0 5px #241324
+}
+
+.artist-node-label{
+  position:absolute;
+  left:5px;
+  top:-5px;
+  padding:4px 6px;
+  border-radius:4px;
+  background:#fe84fe7c;
+  border:0px solid rgba(5, 5, 5, 0);
+  color:var(--lime);
+  font:500 15px "Inconsolata",monospace;
+  white-space:nowrap;
+  pointer-events:none
+}
+
+.artist-node-label.hidden{
+  display:none
+}
+
+.node-line{
+  pointer-events:none
+}
+
+/* Buttons and popups */
+
+@media(max-width:700px){
+  .brand{top:18px;
+    left:18px
+  }
+
+  .controls{
+    top:18px;
+    right:18px
+  }
+
+  .search-wrap{
+    left:18px;
+    bottom:18px;
+    width:calc(100vw - 36px)
+  }
+
+  .info-panel{
+    top:auto;
+    right:10px;
+    bottom:10px;
+    width:calc(100vw - 20px);
+    max-height:60vh;
+    transform:translateY(calc(100% + 20px))
+  }
+
+  .info-panel.open{
+    transform:translateY(0)
+  }
+
+  .unmapped{
+    right:18px;
+    bottom:70px
+  }
+}
+
+/* Dev. positioning mode */
+
+#devPosition{
+  position:absolute;
+  z-index:1200;
+  left:50%;
+  top:18px;
+  transform:translateX(-50%) translateY(-150%);transition:transform .2s ease;
+  background:rgba(5,5,5,.97);
+  border:1px solid var(--lime);
+  border-radius:12px;
+  padding:13px 15px;
+  min-width:270px;
+  box-shadow:0 12px 40px rgba(0,0,0,.5);
+  font:11px "Inconsolata",monospace
+}
+
+#devPosition.visible{
+  transform:translateX(-50%) translateY(0)
+}
+
+#devPosition strong{
+  display:block;
+  color:var(--lime);
+  font-size:10px;
+  letter-spacing:.12em;
+  margin-bottom:7px
+}
+
+#devPosition .dev-help{
+  color:var(--muted);
+  margin-bottom:8px;
+  line-height:1.4
+}
+
+#devCoords{
+  color:var(--ink);
+  font-weight:700;
+  margin-bottom:3px
+}
+
+#devCity{
+  color:var(--pink);
+  margin-bottom:7px
+}
+
+#devJson{
+  display:none;
+  margin:8px 0;
+  padding:8px;
+  border-radius:7px;
+  background:#ffffff0d;
+  color:var(--lime);
+  font-size:10px;
+  white-space:pre-wrap
+}
+
+#devPosition.has-position #devJson{
+  display:block
+}
+
+.dev-buttons{
+  display:flex;
+  gap:7px
+}
+
+.dev-buttons button{
+  border:1px solid #de58ff59;
+  background:transparent;
+  color:var(--lime);
+  border-radius:999px;
+  padding:6px 10px;
+  cursor:pointer;
+  font:600 10px "Inconsolata",monospace
+}
+
+.dev-buttons button:hover{
+  background:#de58ff1a
+}
+
+.developer-crosshair{
+  background:transparent!important;
+  border:0!important
+}
+
+.crosshair{
+  width:30px;
+  height:30px;
+  position:relative
+}
+
+.crosshair::before,.crosshair::after{
+  content:"";
+  position:absolute;
+  background:var(--lime)
+}
+
+.crosshair::before{
+  width:30px;
+  height:1px;
+  left:0;
+  top:14px
+}
+
+.crosshair::after{
+  width:1px;
+  height:30px;
+  left:14px;
+  top:0
+}
+
+.crosshair span{
+  position:absolute;
+  width:7px;
+  height:7px;
+  left:11px;
+  top:11px;
+  border:1px solid var(--lime);
+  border-radius:50%
+}
+
+/* Soundcloud Player */
 
 .radio-player {
   position: fixed;
@@ -79,20 +527,15 @@
   right: 0;
   bottom: 0;
   z-index: 2000;
-
-  min-height: 64px;
-
+  min-height: 100px;
   display: grid;
   grid-template-columns: minmax(170px, 1fr) auto auto minmax(280px, 2fr) 105px;
   align-items: center;
   gap: 10px;
-
   padding: 7px 14px;
-
   background: rgba(8, 8, 8, .94);
   border-top: 1px solid rgba(254,132,253,.22);
   backdrop-filter: blur(16px);
-
   font-family: "Inconsolata", "Courier New", monospace;
 }
 
@@ -101,14 +544,14 @@
 }
 
 .radio-label {
-  font-size: 9px;
+  font:600 10px "Inconsolata",monospace;
   letter-spacing: .14em;
   color: var(--pink);
   margin-bottom: 3px;
 }
 
 #currentEpisode {
-  font-size: 12px;
+  font:600 12px "Inconsolata",monospace;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
@@ -121,13 +564,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,.2);
   background: transparent;
   color: var(--ink);
   cursor: pointer;
-
   font: 20px "Inconsolata", "Courier New", monospace;
 }
 
@@ -138,7 +579,7 @@
 
 .soundcloud-wrap {
   min-width: 0;
-  height: 80px;
+  height: 100px;
   overflow: hidden;
   border-radius: 7px;
 }
@@ -146,22 +587,18 @@
 #soundcloudPlayer {
   display: block;
   width: 100%;
-  height: 80px;
+  height: 100px;
   border: 0;
 }
 
 #episodePicker {
   width: 100%;
   min-width: 0;
-
   border: 1px solid rgba(255,255,255,.18);
   border-radius: 999px;
-
   background: #111;
   color: var(--ink);
-
   padding: 7px 9px;
-
   font: 11px "Inconsolata", "Courier New", monospace;
 }
 
@@ -187,7 +624,6 @@
   }
 }
 
-/* Make native form controls consistently console-like. */
 button,
 input,
 select,

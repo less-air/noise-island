@@ -7,7 +7,8 @@ ROOT = Path(__file__).resolve().parent
 df = pd.read_excel(ROOT / "Database.xlsx")
 df.columns = [str(c).strip() for c in df.columns]
 
-# city-positions.json is the source for mappable places.
+# city-positions.json for coordinates
+
 positions = json.loads(
     (ROOT / "city-positions.json").read_text(encoding="utf-8")
 )
@@ -50,7 +51,7 @@ for _, row in df.iterrows():
         if city and city not in locations:
             locations.append(city)
 
-    # Current workbook uses Website; retain compatibility with Links.
+    # Website or Links.
     link = clean(row.get("Links")) or clean(row.get("Website"))
 
     artists.append({

@@ -5,7 +5,7 @@ const H = 2048;
 
 const map = L.map("map", {
   crs: L.CRS.Simple,
-  minZoom: -1.75,
+  minZoom: -2.0,
   maxZoom: 2.5,
   zoomSnap: 0.25,
   zoomDelta: 0.25,
@@ -13,7 +13,8 @@ const map = L.map("map", {
   attributionControl: false,
   maxBounds: [[-80, -80], [H + 80, W + 80]],
   maxBoundsViscosity: 0.9
-});
+}
+);
 
 const imageBounds = [[0, 0], [H, W]];
 
@@ -21,9 +22,12 @@ L.imageOverlay("noiseisland.png", imageBounds, {
   opacity: 1,
   interactive: false,
   zIndex: 1
-}).addTo(map);
-
-map.fitBounds(imageBounds, { padding: [20, 20] });
+}
+)
+.addTo(map);
+map.fitBounds(imageBounds, {
+  padding: [20, 20] }
+);
 
 const $ = id => document.getElementById(id);
 const panel = $("infoPanel");
@@ -70,7 +74,6 @@ function tags(a) {
 
 function card(a) {
   const t = tags(a);
-
   return `<article class="artist-card">
     <div class="artist-name">${esc(a.artist)}</div>
     ${t.length ? `<div class="hashtags">${t.map(x => `<span class="tag">${esc(x)}</span>`).join("")}</div>` : ""}
@@ -88,9 +91,7 @@ function openPanel() {
 $("closePanel").onclick = () => panel.classList.remove("open");
 $("resetMap").onclick = () => map.fitBounds(imageBounds, { padding: [20, 20] });
 
-// -----------------------------------------------------------------------------
-// CITY POSITION CONFIGURATION
-// -----------------------------------------------------------------------------
+/* City Positioning */
 
 let CITY_POSITIONS = {};
 
@@ -102,13 +103,10 @@ function cityPoint(cityName) {
     return null;
   }
 
-  // CRS.Simple uses [y,x].
   return [p.y, p.x];
 }
 
-// -----------------------------------------------------------------------------
-// DEVELOPER POSITIONING MODE
-// -----------------------------------------------------------------------------
+/* Dev Mode */
 
 let developerMode = false;
 let positionMarker = null;
@@ -142,27 +140,21 @@ function setDeveloperMode(enabled) {
 function selectDeveloperPosition(latlng) {
   const x = Math.round(latlng.lng);
   const y = Math.round(latlng.lat);
-
   $("devCoords").textContent = `x: ${x}, y: ${y}`;
-
   const cityName = window.prompt(
     `Selected PNG position: x ${x}, y ${y}\n\nEnter the city name, or Cancel to inspect only.`
   );
-
   const entry = cityName && cityName.trim()
     ? { [cityName.trim()]: { x, y } }
     : { x, y };
-
   $("devCity").textContent = cityName && cityName.trim()
     ? cityName.trim()
     : "Coordinate only";
-
   $("devJson").textContent = JSON.stringify(entry, null, 2);
   devPanel.dataset.json = JSON.stringify(entry, null, 2);
   devPanel.classList.add("has-position");
 
   if (positionMarker) map.removeLayer(positionMarker);
-
   positionMarker = L.marker([y, x], {
     interactive: false,
     zIndexOffset: 5000,
@@ -203,9 +195,7 @@ $("devCopy").onclick = async () => {
   }
 };
 
-// -----------------------------------------------------------------------------
-// LOAD ARTIST DATA + CITY POSITIONS
-// -----------------------------------------------------------------------------
+/* Load artists and city positions */
 
 Promise.all([
   fetch("data.json").then(r => {
@@ -219,8 +209,6 @@ Promise.all([
 ])
 .then(([data, positions]) => {
   CITY_POSITIONS = positions;
-
-  // build_data.py produces { artists: [...] }.
   const artists = Array.isArray(data.artists) ? data.artists : [];
 
   if (!artists.length) {
@@ -269,9 +257,7 @@ Promise.all([
     });
   }
 
-  // ---------------------------------------------------------------------------
-  // CITY MARKERS
-  // ---------------------------------------------------------------------------
+  /* City Nodes */
 
   cityNames.forEach(name => {
     const pos = cityPoint(name);
@@ -294,9 +280,7 @@ Promise.all([
       .on("click", () => openCity(name, list));
   });
 
-  // ---------------------------------------------------------------------------
-  // ARTIST NODES
-  // ---------------------------------------------------------------------------
+  /* Artists Nodes */
 
   cityNames.forEach(name => {
     const cityPos = cityPoint(name);
@@ -334,9 +318,7 @@ Promise.all([
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // LABEL TOGGLE
-  // ---------------------------------------------------------------------------
+  /* Artists name toggle */
 
   let labels = true;
   $("toggleLabels").onclick = () => {
@@ -347,9 +329,18 @@ Promise.all([
     });
   };
 
-  // ---------------------------------------------------------------------------
-  // UNMAPPED ARTISTS
-  // ---------------------------------------------------------------------------
+  /* City name toggle */
+
+  let labels = true;
+  $("cityNamesToggle").onclick = () => {
+    labels = !labels;
+    $("cityNamesToggle").classList.toggle("active", labels);
+    document.querySelectorAll(".city-label").forEach(el => {
+      el.classList.toggle("hidden", !labels);
+    });
+  };
+
+  /* Unmapped artists */
 
   const unmapped = artists.filter(a => !(a.locations || []).length);
   $("unmappedCount").textContent = unmapped.length;
@@ -362,9 +353,7 @@ Promise.all([
     openPanel();
   };
 
-  // ---------------------------------------------------------------------------
-  // SEARCH
-  // ---------------------------------------------------------------------------
+  /* Search */
 
   const searchable = [
     ...cityNames.map(name => ({ type: "city", name })),
@@ -416,9 +405,7 @@ Promise.all([
 });
 
 
-// ======================================================
-// SOUNDCLOUD RADIO PLAYER
-// ======================================================
+/* Soundcloud player */
 
 const soundcloudPlayer = document.getElementById("soundcloudPlayer");
 const currentEpisodeElement = document.getElementById("currentEpisode");

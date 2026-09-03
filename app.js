@@ -6,9 +6,9 @@ const H = 2048;
 const map = L.map("map", {
   crs: L.CRS.Simple,
   minZoom: -2.0,
-  maxZoom: 2.5,
-  zoomSnap: 0.25,
-  zoomDelta: 0.25,
+  maxZoom: 2.0,
+  zoomSnap: 0.1,
+  zoomDelta: 0.1,
   zoomControl: true,
   attributionControl: false,
   maxBounds: [[-80, -80], [H + 80, W + 80]],

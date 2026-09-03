@@ -160,7 +160,7 @@ h1{
 .info-panel{
   position:absolute;
   z-index:800;
-  top:50px;
+  top:100px;
   bottom:200px;
   right:28px;
   width:min(430px,calc(100vw - 40px));

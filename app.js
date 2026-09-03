@@ -1,4 +1,4 @@
-// Noise Island — Ireland's Experimental Music Map
+// Noise Island — Ireland's Experimental Music Map//
 
 const W = 1538;
 const H = 2048;
@@ -91,7 +91,7 @@ function openPanel() {
 $("closePanel").onclick = () => panel.classList.remove("open");
 $("resetMap").onclick = () => map.fitBounds(imageBounds, { padding: [20, 20] });
 
-/* City Positioning */
+//* City Positioning *//
 
 let CITY_POSITIONS = {};
 
@@ -106,7 +106,7 @@ function cityPoint(cityName) {
   return [p.y, p.x];
 }
 
-/* Dev Mode */
+//* Dev Mode *//
 
 let developerMode = false;
 let positionMarker = null;
@@ -195,7 +195,7 @@ $("devCopy").onclick = async () => {
   }
 };
 
-/* Load artists and city positions */
+//* Load artists and city positions */
 
 Promise.all([
   fetch("data.json").then(r => {
@@ -257,7 +257,7 @@ Promise.all([
     });
   }
 
-  /* City Nodes */
+  //* City Nodes */
 
   cityNames.forEach(name => {
     const pos = cityPoint(name);
@@ -280,7 +280,7 @@ Promise.all([
       .on("click", () => openCity(name, list));
   });
 
-  /* Artists Nodes */
+  //* Artists Nodes */
 
   cityNames.forEach(name => {
     const cityPos = cityPoint(name);
@@ -318,7 +318,7 @@ Promise.all([
     });
   });
 
-  /* Artists name toggle */
+  //* Artists name toggle */
 
   let labels = true;
   $("toggleLabels").onclick = () => {
@@ -329,7 +329,7 @@ Promise.all([
     });
   };
 
-  /* City name toggle */
+  //* City name toggle */
 
   let labels = true;
   $("cityNamesToggle").onclick = () => {
@@ -340,7 +340,7 @@ Promise.all([
     });
   };
 
-  /* Unmapped artists */
+  //* Unmapped artists */
 
   const unmapped = artists.filter(a => !(a.locations || []).length);
   $("unmappedCount").textContent = unmapped.length;
@@ -353,7 +353,7 @@ Promise.all([
     openPanel();
   };
 
-  /* Search */
+  //* Search */
 
   const searchable = [
     ...cityNames.map(name => ({ type: "city", name })),
@@ -405,7 +405,7 @@ Promise.all([
 });
 
 
-/* Soundcloud player */
+//* Soundcloud player */
 
 const soundcloudPlayer = document.getElementById("soundcloudPlayer");
 const currentEpisodeElement = document.getElementById("currentEpisode");

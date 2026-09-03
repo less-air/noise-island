@@ -458,7 +458,7 @@ fetch("episodes.json")
   });
 
 function soundCloudEmbedUrl(url) {
-  return "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2325516866&color=%23f4a6d2&inverse=false&auto_play=false&show_user=false" +
+  return "https://w.soundcloud.com/player/?" +
     new URLSearchParams({
       url: url,
       inverse: "true",

@@ -9,7 +9,7 @@
   --lime:#422142;
   --panel:#000000f5;
   --line:#422142;
-  --muted:rgba(246,241,235,.64)
+  --muted:#63366d79;
 }
 
 /* General */
@@ -43,13 +43,14 @@ body{
   position:absolute;
   z-index:600;
   top:28px;
-  left:30px;
+  left:20px;
   pointer-events:none;
   text-shadow:0 3px 20px #000
 }
 
 .eyebrow,.panel-kicker{
   font-size:11px;
+  left:20px;
   letter-spacing:.16em;
   font-weight:700;
   color:var(--pink)
@@ -58,7 +59,8 @@ body{
 h1,h2{
   font-family:"Inconsolata","Courier New",monospace;
   margin:5px 0 8px;
-  letter-spacing:-.05em
+  letter-spacing:-.05em;
+  left: 20px
 }
 
 h1{

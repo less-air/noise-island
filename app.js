@@ -347,15 +347,6 @@ Promise.all([
     });
   };
 
-  let labels = true;
-  $("cityNamesToggle").onclick = () => {
-    labels = !labels;
-    $("cityNamesToggle").classList.toggle("active", labels);
-    document.querySelectorAll(".city-label").forEach(el => {
-      el.classList.toggle("hidden", !labels);
-    });
-  };
-
   // ---------------------------------------------------------------------------
   // UNMAPPED ARTISTS
   // ---------------------------------------------------------------------------

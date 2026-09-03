@@ -382,7 +382,7 @@ h1{
   .info-panel{
     top:auto;
     right:10px;
-    bottom:10px;
+    bottom:100px;
     width:calc(100vw - 20px);
     max-height:60vh;
     transform:translateY(calc(100% + 20px))
@@ -394,7 +394,7 @@ h1{
 
   .unmapped{
     right:18px;
-    bottom:70px
+    bottom:100px
   }
 }
 

@@ -461,6 +461,7 @@ function soundCloudEmbedUrl(url) {
   return "https://w.soundcloud.com/player/?" +
     new URLSearchParams({
       url: url,
+      inverse: "true",
       color: "#fe84fd",
       auto_play: "false",
       hide_related: "true",
@@ -468,6 +469,7 @@ function soundCloudEmbedUrl(url) {
       show_user: "false",
       show_reposts: "false",
       show_teaser: "false",
+      show_artwork: "false",
       visual: "false"
     }).toString();
 }

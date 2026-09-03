@@ -544,14 +544,14 @@ h1{
 }
 
 .radio-label {
-  font:600 10px "Inconsolata",monospace;
+  font:600 15px "Inconsolata",monospace;
   letter-spacing: .14em;
   color: var(--pink);
   margin-bottom: 3px;
 }
 
 #currentEpisode {
-  font:600 12px "Inconsolata",monospace;
+  font:600 20px "Inconsolata",monospace;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
